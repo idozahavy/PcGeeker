@@ -1,0 +1,39 @@
+CPU
+	Core 
+		Load
+		Temperature
+		Clock
+	Total Cores Load
+	Cores Power
+	Package Temperature
+	Package Power
+	Graphics Power
+	DRAM Power
+	Bus Speed Clock
+	
+
+********************************************
+
+
+CPU Sensors 
+-------------------------------------
+
+CPU Core #1, Load = 0
+CPU Core #2, Load = 100
+CPU Core #3, Load = 0
+CPU Core #4, Load = 100
+CPU Total, Load = 50
+CPU Core #1, Temperature = 45
+CPU Core #2, Temperature = 46
+CPU Core #3, Temperature = 45
+CPU Core #4, Temperature = 44
+CPU Package, Temperature = 46
+CPU Core #1, Clock = 3200.198
+CPU Core #2, Clock = 3200.198
+CPU Core #3, Clock = 3200.198
+CPU Core #4, Clock = 3200.198
+CPU Package, Power = 39.01125
+CPU Cores, Power = 28.30883
+CPU Graphics, Power = 0
+CPU DRAM, Power = 1.764717
+Bus Speed, Clock = 100.0062

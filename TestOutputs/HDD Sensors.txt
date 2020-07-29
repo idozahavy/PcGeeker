@@ -1,0 +1,12 @@
+Drive
+	Temperature
+	UsedSpacePercentage
+
+
+******************************************
+
+HDD Sensors
+--------------------
+
+Temperature, Temperature = 36
+Used Space, Load = 70.1246

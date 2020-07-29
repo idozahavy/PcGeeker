@@ -1,0 +1,16 @@
+RAM
+	Memory
+		Used
+		Available/Free
+		Total = null
+	Load
+
+
+**************************************
+
+RAM Sensors 
+---------------------------
+
+Memory, Load = 62.2752
+Used Memory, Data = 4.89835
+Available Memory, Data = 2.9673
