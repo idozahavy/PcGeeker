@@ -53,6 +53,8 @@ namespace HardwareInfo
             private set;
         }
 
+        public override AHardwareType HardwareType { get => AHardwareType.Motherboard; }
+
         public Motherboard(IHardware hardware) : base(hardware)
         {
             Initialize();
@@ -71,9 +73,11 @@ namespace HardwareInfo
 
         internal override void Initialize()
         {
+            Controller = hardware;
             foreach (ISensor sensor in hardware.Sensors)
             {
                 this.Initialize(sensor);
+                Console.WriteLine(sensor.Name);
             }
             foreach (IHardware subHardware in hardware.SubHardware)
             {

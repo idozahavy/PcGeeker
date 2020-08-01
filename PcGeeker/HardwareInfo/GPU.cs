@@ -55,6 +55,8 @@ namespace HardwareInfo
             private set;
         }
 
+        public override AHardwareType HardwareType { get => AHardwareType.GPU; }
+
         public GPU(IHardware hardware) : base(hardware)
         {
             Initialize();          

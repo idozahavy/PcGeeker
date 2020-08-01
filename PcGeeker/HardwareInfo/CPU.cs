@@ -56,6 +56,8 @@ namespace HardwareInfo
             private set;
         }
 
+        public override AHardwareType HardwareType { get => AHardwareType.CPU; }
+
         public CPU(IHardware cpu) : base(cpu)
         {
             Cores = new Dictionary<int, Core>();

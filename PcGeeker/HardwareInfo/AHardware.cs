@@ -10,6 +10,8 @@ namespace HardwareInfo
             private set;
         }
 
+        public abstract AHardwareType HardwareType { get; }
+
         public AHardware(IHardware hardware)
         {
             this.hardware = hardware;
@@ -21,5 +23,14 @@ namespace HardwareInfo
         }
 
         internal abstract void Initialize();
+
+        public enum AHardwareType
+        {
+            CPU = 1,
+            GPU = 2,
+            RAM = 3,
+            Drive = 4,
+            Motherboard = 5
+        }
     }
 }

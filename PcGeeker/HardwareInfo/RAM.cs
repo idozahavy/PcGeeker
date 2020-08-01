@@ -27,6 +27,8 @@ namespace HardwareInfo
             private set;
         }
 
+        public override AHardwareType HardwareType { get => AHardwareType.RAM; }
+
         public RAM(IHardware hardware) : base(hardware)
         {
             Initialize();

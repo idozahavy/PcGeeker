@@ -22,6 +22,8 @@ namespace HardwareInfo
             private set;
         }
 
+        public override AHardwareType HardwareType { get => AHardwareType.Drive; }
+
         public Drive(IHardware hardware) : base(hardware)
         {
             Initialize();
