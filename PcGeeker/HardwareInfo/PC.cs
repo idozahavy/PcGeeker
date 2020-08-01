@@ -27,6 +27,12 @@ namespace HardwareInfo
             private set;
         }
 
+        public Motherboard Motherboard
+        {
+            get;
+            private set;
+        }
+
         public PC(bool visitAll)
         {
             if(visitAll)
@@ -97,10 +103,15 @@ namespace HardwareInfo
                     }
                     else if(hard.HardwareType == HardwareType.Mainboard)
                     {
+                        //this.Motherboard = new Motherboard(hard);
                         Console.WriteLine("Mainboard");
                         foreach (IHardware hard2 in hard.SubHardware)
                         {
                             Console.WriteLine(hard2.Name + ", " + hard2.HardwareType);
+                            foreach (ISensor sensor in hard2.Sensors)
+                            {
+                                Console.WriteLine(sensor.Name + ", " + sensor.SensorType + " = " + sensor.Value);
+                            }
                         }
                     }
                     else if(hard.HardwareType == HardwareType.RAM)

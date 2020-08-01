@@ -1,0 +1,27 @@
+Motherboard
+
+
+
+
+************************************
+
+Motherboard Sensors
+-------------------
+
+ITE IT8620E, SuperIO
+	Fan Control #1, Control = 
+	Fan Control #2, Control = 
+	Fan Control #3, Control = 
+	Voltage #1, Voltage = 1.032
+	Voltage #2, Voltage = 2.028
+	Voltage #3, Voltage = 1.956
+	Voltage #4, Voltage = 2.028
+	Voltage #5, Voltage = 0.012
+	Voltage #6, Voltage = 1.728
+	Voltage #7, Voltage = 1.488
+	Standby +3.3V, Voltage = 3.384
+	VBat, Voltage = 3.12
+	Temperature #1, Temperature = 34
+	Temperature #3, Temperature = 41
+	Fan #1, Fan = 1569.767
+	Fan #2, Fan = 851.198
