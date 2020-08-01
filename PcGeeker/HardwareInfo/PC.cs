@@ -27,6 +27,12 @@ namespace HardwareInfo
             private set;
         }
 
+        public List<Drive> Drives
+        {
+            get;
+            private set;
+        }
+
         public Motherboard Motherboard
         {
             get;
@@ -58,6 +64,7 @@ namespace HardwareInfo
             computer = new Computer();
             computer.Open();
             visitSetting.SetComputer(computer);
+            this.Drives = new List<Drive>();
         }
 
         public void RefreshInfo()
@@ -95,6 +102,7 @@ namespace HardwareInfo
                     }
                     else if(hard.HardwareType == HardwareType.HDD)
                     {
+                        this.Drives.Add(new Drive(hard));
                         Console.WriteLine("HDD");
                     }
                     else if(hard.HardwareType == HardwareType.Heatmaster)

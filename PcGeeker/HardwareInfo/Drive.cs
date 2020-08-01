@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace HardwareInfo
 {
-    class Drive : AHardware
+    public class Drive : AHardware
     {
         public ISensor Temperature
         {
@@ -23,6 +23,7 @@ namespace HardwareInfo
 
         public Drive(IHardware hardware) : base(hardware)
         {
+            Initialize();
         }
 
         internal override void Initialize()
@@ -36,7 +37,6 @@ namespace HardwareInfo
                     default:
                         MessageBox.Show("Uncaught ram sensor type " + sensor.SensorType.ToString()); break;
                 }
-            //TODO Check if works
             }
         }
     }
