@@ -4,7 +4,11 @@ namespace HardwareInfo
 {
     public abstract class AHardware
     {
-        protected IHardware hardware;
+        public IHardware hardware
+        {
+            get;
+            private set;
+        }
 
         public AHardware(IHardware hardware)
         {
