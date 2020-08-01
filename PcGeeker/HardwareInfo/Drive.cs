@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,6 +25,13 @@ namespace HardwareInfo
         public Drive(IHardware hardware) : base(hardware)
         {
             Initialize();
+            foreach (PropertyInfo prop in this.GetType().GetProperties())
+            {
+                if (prop.PropertyType == typeof(ISensor))
+                {
+                    prop.SetValue(this, Sensors.NAIfNull((ISensor)prop.GetValue(this)));
+                }
+            }
         }
 
         internal override void Initialize()

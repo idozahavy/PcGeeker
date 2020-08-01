@@ -1,4 +1,5 @@
 ﻿using OpenHardwareMonitor.Hardware;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace HardwareInfo
@@ -24,6 +25,13 @@ namespace HardwareInfo
 
         public Memory()
         {
+            foreach (PropertyInfo prop in this.GetType().GetProperties())
+            {
+                if (prop.PropertyType == typeof(ISensor))
+                {
+                    prop.SetValue(this, Sensors.NAIfNull((ISensor)prop.GetValue(this)));
+                }
+            }
         }
 
         internal virtual void Initialize(ISensor sensor)

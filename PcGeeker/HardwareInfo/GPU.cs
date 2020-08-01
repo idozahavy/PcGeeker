@@ -1,5 +1,6 @@
 ﻿using OpenHardwareMonitor.Hardware;
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace HardwareInfo
@@ -56,7 +57,14 @@ namespace HardwareInfo
 
         public GPU(IHardware hardware) : base(hardware)
         {
-            Initialize();
+            Initialize();          
+            foreach(PropertyInfo prop in this.GetType().GetProperties())
+            {
+                if (prop.PropertyType == typeof(ISensor))
+                {
+                    prop.SetValue(this, Sensors.NAIfNull((ISensor)prop.GetValue(this)));
+                }
+            }
         }
 
         internal override void Initialize()

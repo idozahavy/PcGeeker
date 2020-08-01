@@ -1,6 +1,12 @@
 Motherboard
-
-
+	Controller : IHardware
+	FanControls : List<ISensor>
+	Voltages : List<ISensor>
+	Voltage3p3 : ISensor
+	VBat : ISensor
+	Temperatures : List<ISensor>
+	CpuFanSpeed : ISensor
+	FanSpeeds : List<ISensor>
 
 
 ************************************

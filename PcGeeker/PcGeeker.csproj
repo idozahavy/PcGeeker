@@ -66,6 +66,7 @@
     <Compile Include="HardwareInfo\GPUMemory.cs" />
     <Compile Include="HardwareInfo\Memory.cs" />
     <Compile Include="HardwareInfo\Motherboard.cs" />
+    <Compile Include="HardwareInfo\Sensors.cs" />
     <Compile Include="HardwareInfo\PC.cs" />
     <Compile Include="HardwareInfo\RAM.cs" />
     <Compile Include="HardwareInfo\VisitorUpdater.cs" />

@@ -75,18 +75,20 @@ namespace HardwareInfo
                     case "ram": this.RAM = true; break;
 
                     case "mb":
+                    case "mainboard":
                     case "motherboard": this.MOTHERBOARD = true; break;
 
                     case "ssd":
-                    case "drive":
-                    case "hdd": this.HDD = true; break;
+                    case "hdd":
+                    case "drive": this.HDD = true; break;
 
+                    case "fans":
                     case "fan": this.FAN = true; break;
                 }
             }
         }
 
-        public void SetComputer(Computer computer)
+        public void SetComputerSettings(Computer computer)
         {
             computer.CPUEnabled = CPU;
             computer.GPUEnabled = GPU;

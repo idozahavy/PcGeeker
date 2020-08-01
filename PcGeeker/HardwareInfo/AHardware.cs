@@ -11,10 +11,9 @@ namespace HardwareInfo
             this.hardware = hardware;
         }
 
-        public void Initialize(IVisitor visitor)
+        public void Update(IVisitor visitor)
         {
             hardware.Accept(visitor);
-            Initialize();
         }
 
         internal abstract void Initialize();
