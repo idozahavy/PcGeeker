@@ -70,8 +70,6 @@ namespace PcGeeker
                 }
             }
             Jsoner.ObjectSaver.SaveObjectsToFileType("jsoner");
-            Jsoner.ObjectSaver.SaveObjectToFile(false, "false", ".txt");
-            Jsoner.ObjectSaver.LoadObjectFromFile<bool>("false.txt");
         }
     }
 }
