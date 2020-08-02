@@ -13,46 +13,109 @@ namespace Jsoner
 {
     class ObjectSaver
     {
-        private static List<string> serializedObjectStrings;
-        private static JsonSerializerSettings jsonSettings;
-
-        public static void AddObjectToList(object obj)
+        public static List<object> ObjectsList
         {
-            if (jsonSettings == null)
-            {
-                jsonSettings = new JsonSerializerSettings()
-                {
-                    MaxDepth = null,
-                    Formatting = Formatting.None,
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                };
-            }
-            if (serializedObjectStrings == null)
-            {
-                serializedObjectStrings = new List<string>();
-            }
-            serializedObjectStrings.Add(JsonConvert.SerializeObject(obj, jsonSettings));
+            get;
+            private set;
         }
 
-        public static void SaveObjectsToFile(string fileName)
+        private static JsonSerializerSettings _jsonSerSettings;
+        private static JsonSerializerSettings JsonSerSettings
         {
-            if (serializedObjectStrings != null)
+            get
             {
-                FileStream stream = File.Create(fileName);
-                StreamWriter writer = new StreamWriter(stream);
-                writer.Write("{");
-                int count = 0;
-                foreach (string obj in serializedObjectStrings)
+                if (_jsonSerSettings == null)
                 {
-                    writer.Write("\"{0}\":",count++);
-                    writer.Write(obj);
-                    if (count < serializedObjectStrings.Count)
-                    writer.Write(",");
-                    writer.Flush();
+                    _jsonSerSettings = new JsonSerializerSettings()
+                    {
+                        MaxDepth = null,
+                        Formatting = Formatting.None,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    };
                 }
-                writer.Write("}");
-                writer.Close();
+                return _jsonSerSettings;
             }
+        }
+
+        public static void AddObject(object obj)
+        {
+            if (ObjectsList == null)
+            {
+                ObjectsList = new List<object>();
+            }
+            ObjectsList.Add(obj);
+        }
+
+        private static List<string> serializeObjects(List<object> objs){
+            List<string> serializedObjects = new List<string>();
+            foreach (object obj in objs)
+            {
+                serializedObjects.Add(JsonConvert.SerializeObject(obj, JsonSerSettings));
+            }
+            return serializedObjects;
+        }
+
+        public static void SaveObjectsToFile(string fileNamePrefix, string fileNameSuffix)
+        {
+            int count = 0;
+            foreach (object obj in ObjectsList)
+            {
+                SaveObjectToFile(obj, fileNamePrefix + (count++).ToString() + fileNameSuffix, ".json");
+            }
+        }
+
+        public static void SaveObjectsToFileType()
+        {
+            SaveObjectsToFileType("");
+        }
+
+        public static void SaveObjectsToFileType(string path)
+        {
+            if (!path.EndsWith("\\") && !path.EndsWith("/"))
+            {
+                path += "\\";
+            }
+            Directory.CreateDirectory(path);
+            foreach (object obj in ObjectsList)
+            {
+                SaveObjectToFile(obj, path+obj.GetType().ToString(), ".json");
+            }
+        }
+
+        public static void SaveObjectToFile(object obj, string fileName, string extension)
+        {
+            if (!extension.StartsWith("."))
+            {
+                extension = "." + extension;
+            }
+            string objSer = JsonConvert.SerializeObject(obj, JsonSerSettings);
+            int count = 0;
+            FileStream stream;
+            if (File.Exists(fileName + extension))
+            {
+                while (File.Exists(fileName + (++count) + extension)) ;
+                stream = File.Create(fileName + count + extension);
+            }
+            else
+            {
+                stream = File.Create(fileName + extension);
+            }
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(objSer);
+            writer.Close();
+        }
+
+        public static ObjectType LoadObjectFromFile<ObjectType>(string fileName)
+        {
+            FileStream stream = new FileStream(fileName, FileMode.Open);
+            StreamReader streamReader = new StreamReader(stream);
+            string fileString = "";
+            while (!streamReader.EndOfStream)
+            {
+                fileString += streamReader.ReadLine();
+            }
+            streamReader.Close();
+            return JsonConvert.DeserializeObject<ObjectType>(fileString, JsonSerSettings);
         }
     }
 }
