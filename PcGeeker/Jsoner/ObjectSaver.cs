@@ -13,10 +13,17 @@ namespace Jsoner
 {
     class ObjectSaver
     {
+        private static List<object> _objectList;
         public static List<object> ObjectsList
         {
-            get;
-            private set;
+            get
+            {
+                if (_objectList == null)
+                {
+                    _objectList = new List<object>();
+                }
+                return _objectList;
+            }
         }
 
         private static JsonSerializerSettings _jsonSerSettings;
@@ -39,11 +46,12 @@ namespace Jsoner
 
         public static void AddObject(object obj)
         {
-            if (ObjectsList == null)
-            {
-                ObjectsList = new List<object>();
-            }
             ObjectsList.Add(obj);
+        }
+
+        public static void ClearObjects()
+        {
+            ObjectsList.Clear();
         }
 
         public static void SaveObjectsToFile(string fileNamePrefix, string fileNameSuffix)
