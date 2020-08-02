@@ -10,7 +10,12 @@ namespace HardwareInfo.PCAnalyzer
 {
     public class SensorThresholdProperty
     {
-        public float Value
+        public ISensor Sensor
+        {
+            get;
+            private set;
+        }
+        public float ThresholdValue
         {
             get;
             private set;
@@ -21,16 +26,25 @@ namespace HardwareInfo.PCAnalyzer
             private set;
         }
 
-        public SensorThresholdProperty(string FloatPropertyName, float thresholdValue)
+        public SensorThresholdProperty(ISensor sensor, string FloatPropertyName, float thresholdValue)
         {
+            this.Sensor = sensor;
             this.Property = typeof(ISensor).GetProperty(FloatPropertyName, typeof(float?));
-            this.Value = thresholdValue;
+            this.ThresholdValue = thresholdValue;
         }
-        public SensorThresholdProperty(float thresholdValue): this("Value", thresholdValue) { }
+        /// <summary>
+        /// Threshold the sensor Value
+        /// </summary>
+        public SensorThresholdProperty(ISensor sensor, float thresholdValue) : this(sensor, "Value", thresholdValue) { }
 
-        public bool isThresholded(ISensor sensor)
+        public bool IsSensorThresholded()
         {
-            return (float)Property.GetValue(sensor) >= Value;
+            object sensorValue = Property.GetValue(Sensor);
+            if (sensorValue != null)
+            {
+                return (float)Property.GetValue(Sensor) >= ThresholdValue;
+            }
+            return false;
         }
     }
 }

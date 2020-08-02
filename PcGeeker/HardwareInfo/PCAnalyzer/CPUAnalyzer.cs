@@ -12,24 +12,25 @@ namespace HardwareInfo.PCAnalyzer
         private SensorThresholdProperty powerThreshold;
         private SensorThresholdProperty tempThreshold;
 
-        public CPUAnalyzer()
+        public CPUAnalyzer(CPU cpu)
         {
-            powerThreshold = new SensorThresholdProperty(20);
-            tempThreshold = new SensorThresholdProperty(56);
+            powerThreshold = new SensorThresholdProperty(cpu.PackagePower, 20);
+            tempThreshold = new SensorThresholdProperty(cpu.PackageTemperature, 56);
+
             thresholds = new List<SensorThresholdProperty>();
             thresholds.Add(powerThreshold);
             thresholds.Add(tempThreshold);
         }
 
-        public string Analyze(CPU cpu)
+        public string Analyze()
         {
             string result = "";
 
-                if (powerThreshold.isThresholded(cpu.PackagePower))
+            if (powerThreshold.IsSensorThresholded())
             {
                 result += "Power threshold reached , ";
             }
-            if (tempThreshold.isThresholded(cpu.PackageTemperature))
+            if (tempThreshold.IsSensorThresholded())
             {
                 result += "Temperature threshold reached , ";
             }

@@ -77,8 +77,8 @@ namespace PcGeeker
         private void timer1_Tick(object sender, EventArgs e)
         {
             pc.Update();
-            CPUAnalyzer analyzer = new CPUAnalyzer();
-            label1.Text = analyzer.Analyze(pc.CPU);
+            CPUAnalyzer analyzer = new CPUAnalyzer(pc.CPU);
+            label1.Text = analyzer.Analyze();
         }
     }
 }
