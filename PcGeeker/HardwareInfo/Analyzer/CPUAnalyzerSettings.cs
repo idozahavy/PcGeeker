@@ -75,31 +75,49 @@ namespace HardwareInfo.Analyzer
                 {
                     continue;
                 }
-                switch (segments[1].ToLower())
+                switch (segments[0].ToLower())
                 {
                     case "corepower":
-                    case "corespower": CoresPowerThreshold = new SensorlessThresholdProperty(int.Parse(segments[1])); break;
+                    case "corespower": CoresPowerThreshold = new SensorlessThresholdProperty(float.Parse(segments[1])); break;
                     case "rampower":
-                    case "drampower": DRAMPowerThreshold = new SensorlessThresholdProperty(int.Parse(segments[1])); break;
+                    case "drampower": DRAMPowerThreshold = new SensorlessThresholdProperty(float.Parse(segments[1])); break;
                     case "graphicpower":
-                    case "graphicspower": GraphicsPowerThreshold = new SensorlessThresholdProperty(int.Parse(segments[1])); break;
+                    case "graphicspower": GraphicsPowerThreshold = new SensorlessThresholdProperty(float.Parse(segments[1])); break;
                     case "power":
                     case "totalpower":
-                    case "packagepower": PackagePowerThreshold = new SensorlessThresholdProperty(int.Parse(segments[1])); break;
+                    case "packagepower": PackagePowerThreshold = new SensorlessThresholdProperty(float.Parse(segments[1])); break;
                     case "bus":
-                    case "busclock": BusClockThreshold = new SensorlessThresholdProperty(int.Parse(segments[1])); break;
+                    case "busclock": BusClockThreshold = new SensorlessThresholdProperty(float.Parse(segments[1])); break;
                     case "core":
                     case "threads":
-                    case "cores": CoresThreshold = new SensorlessThresholdProperty(int.Parse(segments[1])); break;
+                    case "cores": CoresThreshold = new SensorlessThresholdProperty(float.Parse(segments[1])); break;
                     case "packagetemp":
                     case "temperature":
                     case "temp":
-                    case "packagetemperature": PackageTemperatureThreshold = new SensorlessThresholdProperty(int.Parse(segments[1])); break;
+                    case "packagetemperature": PackageTemperatureThreshold = new SensorlessThresholdProperty(float.Parse(segments[1])); break;
                     case "load":
                     case "coresload":
-                    case "totalload": TotalLoadThreshold = new SensorlessThresholdProperty(int.Parse(segments[1])); break;
+                    case "totalload": TotalLoadThreshold = new SensorlessThresholdProperty(float.Parse(segments[1])); break;
                 }
             }
+        }
+
+        public string AtrributeStringThreshold(CPU.CPUAttribute attr, float thresholdValue)
+        {
+            string result;
+            switch (attr)
+            {
+                case CPU.CPUAttribute.BusClock: result = "busclock"; break;
+                case CPU.CPUAttribute.CoresPower: result = "corespower"; break;
+                case CPU.CPUAttribute.DRAMPower: result = "drampower"; break;
+                case CPU.CPUAttribute.GraphicsPower: result = "graphicspower"; break;
+                case CPU.CPUAttribute.PackagePower: result = "packagepower"; break;
+                case CPU.CPUAttribute.PackageTemperature: result = "packagetemperature"; break;
+                case CPU.CPUAttribute.TotalLoad: result = "totalload"; break;
+                default:
+                    throw new Exception("AtrributeStringThreshold attribute not found");
+            }
+            return result + ":" + thresholdValue.ToString();
         }
     }
 }

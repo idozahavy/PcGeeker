@@ -82,7 +82,7 @@ namespace PcGeeker
         private void timer1_Tick(object sender, EventArgs e)
         {
             pc.Update();
-            CPUAnalyzer analyzer = new CPUAnalyzer(pc.CPU, new CPUAnalyzerSettings("corespower","temp"));
+            CPUAnalyzer analyzer = new CPUAnalyzer(pc.CPU, new CPUAnalyzerSettings("corespower:10","temp:60"));
             label1.Text = analyzer.Analyze();
         }
     }

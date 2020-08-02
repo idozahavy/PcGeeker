@@ -14,6 +14,18 @@ namespace HardwareInfo
             private set;
         }
 
+        public enum CPUAttribute
+        {
+            PackageTemperature = 1,
+            PackagePower = 2,
+            TotalLoad = 3,
+            CoresPower = 4,
+            GraphicsPower = 5,
+            DRAMPower = 6,
+            BusClock = 7
+
+        }
+
         public ISensor PackageTemperature
         {
             get;
