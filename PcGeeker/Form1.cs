@@ -28,7 +28,7 @@ namespace PcGeeker
                 if (pcProp.GetValue(pc) is AHardware)
                 {
                     AHardware pcHardware = (AHardware)pcProp.GetValue(pc);
-                    Jsoner.ObjectSaver.AddObjectToList(pcHardware.hardware);
+                    Jsoner.ObjectSaver.AddObject(pcHardware.hardware);
                     foreach (PropertyInfo pcHardwareProp in pcHardware.GetType().GetProperties())
                     {
                         if (pcHardwareProp.GetValue(pcHardware) is ISensor)
@@ -50,7 +50,7 @@ namespace PcGeeker
                     List<Drive> drives = (List<Drive>)pcProp.GetValue(pc);
                     foreach (Drive drive in drives)
                     {
-                        Jsoner.ObjectSaver.AddObjectToList(drive);
+                        Jsoner.ObjectSaver.AddObject(drive);
                         foreach (PropertyInfo driveProp in drive.GetType().GetProperties())
                         {
                             if (driveProp.GetValue(drive) is ISensor)
@@ -69,7 +69,9 @@ namespace PcGeeker
                     }
                 }
             }
-            Jsoner.ObjectSaver.SaveObjectsToFile("blip.txt");
+            Jsoner.ObjectSaver.SaveObjectsToFileType("jsoner");
+            Jsoner.ObjectSaver.SaveObjectToFile(false, "false", ".txt");
+            Jsoner.ObjectSaver.LoadObjectFromFile<bool>("false.txt");
         }
     }
 }
