@@ -2,6 +2,7 @@
 using HardwareInfo.PCAnalyzer;
 using OpenHardwareMonitor.Collections;
 using OpenHardwareMonitor.Hardware;
+using ProcessInfo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -72,6 +73,10 @@ namespace PcGeeker
                 }
             }
             timer1.Start();
+
+            ProcessUtilitationCollection utils = new ProcessUtilitationCollection();
+            utils.UpdateProcesses();
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)

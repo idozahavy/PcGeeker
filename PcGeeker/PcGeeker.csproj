@@ -73,6 +73,7 @@
     <Compile Include="HardwareInfo\PCAnalyzer\PCAnalyzer.cs" />
     <Compile Include="HardwareInfo\PCAnalyzer\PCAnalyzerSettings.cs" />
     <Compile Include="HardwareInfo\PCAnalyzer\SensorThresholdProperty.cs" />
+    <Compile Include="ProcessInfo\ProcessUtilitation.cs" />
     <Compile Include="HardwareInfo\Sensors.cs" />
     <Compile Include="HardwareInfo\PC.cs" />
     <Compile Include="HardwareInfo\RAM.cs" />
