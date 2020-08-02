@@ -46,15 +46,6 @@ namespace Jsoner
             ObjectsList.Add(obj);
         }
 
-        private static List<string> serializeObjects(List<object> objs){
-            List<string> serializedObjects = new List<string>();
-            foreach (object obj in objs)
-            {
-                serializedObjects.Add(JsonConvert.SerializeObject(obj, JsonSerSettings));
-            }
-            return serializedObjects;
-        }
-
         public static void SaveObjectsToFile(string fileNamePrefix, string fileNameSuffix)
         {
             int count = 0;
