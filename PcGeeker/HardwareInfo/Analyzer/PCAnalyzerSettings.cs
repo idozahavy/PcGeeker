@@ -34,6 +34,11 @@ namespace HardwareInfo.Analyzer
             get;
             private set;
         }
+        public CPUAnalyzerSettings CPUSettings
+        {
+            get;
+            private set;
+        }
 
         public PCAnalyzerSettings(bool cpu, bool gpu, bool ram, bool drive, bool motherboard) 
         {

@@ -9,7 +9,6 @@ namespace HardwareInfo.Analyzer
     public class CPUAnalyzer
     {
         private CPUAnalyzerSettings settings;
-        private List<SensoredThresholdProperty> thresholds;
         public SensoredThresholdProperty CoresPowerThreshold
         {
             get;
@@ -68,13 +67,13 @@ namespace HardwareInfo.Analyzer
         {
             string result = "";
 
-            if (powerThreshold.IsSensorThresholded())
+            if (CoresPowerThreshold.IsSensorThresholded())
             {
-                result += "Power threshold reached , ";
+                result += "Cores power threshold reached , ";
             }
-            if (tempThreshold.IsSensorThresholded())
+            if (PackageTemperatureThreshold.IsSensorThresholded())
             {
-                result += "Temperature threshold reached , ";
+                result += "Package temperature threshold reached , ";
             }
 
             return result;

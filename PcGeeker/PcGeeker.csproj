@@ -63,6 +63,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="HardwareInfo\AHardware.cs" />
+    <Compile Include="HardwareInfo\Analyzer\CPUAnalyzerSettings.cs" />
+    <Compile Include="HardwareInfo\Analyzer\SensorlessThresholdProperty.cs" />
     <Compile Include="HardwareInfo\CPU.cs" />
     <Compile Include="HardwareInfo\Drive.cs" />
     <Compile Include="HardwareInfo\GPU.cs" />
@@ -72,7 +74,7 @@
     <Compile Include="HardwareInfo\Analyzer\CPUAnalyzer.cs" />
     <Compile Include="HardwareInfo\Analyzer\PCAnalyzer.cs" />
     <Compile Include="HardwareInfo\Analyzer\PCAnalyzerSettings.cs" />
-    <Compile Include="HardwareInfo\Analyzer\SensorThresholdProperty.cs" />
+    <Compile Include="HardwareInfo\Analyzer\SensoredThresholdProperty.cs" />
     <Compile Include="ProcessInfo\ProcessUtilitation.cs" />
     <Compile Include="HardwareInfo\Sensors.cs" />
     <Compile Include="HardwareInfo\PC.cs" />

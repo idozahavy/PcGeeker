@@ -22,7 +22,9 @@ namespace HardwareInfo.Analyzer
 
         public PCAnalyzer(PC pc, string savePath, PCAnalyzerSettings settings)
         {
-            CPU = new CPUAnalyzer(pc.CPU);
+            if (settings.CPU) {
+                CPU = new CPUAnalyzer(pc.CPU, settings.CPUSettings);
+            }
         }
     }
 }
