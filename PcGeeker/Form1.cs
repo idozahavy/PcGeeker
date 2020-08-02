@@ -1,5 +1,5 @@
 ﻿using HardwareInfo;
-using HardwareInfo.PCAnalyzer;
+using HardwareInfo.Analyzer;
 using OpenHardwareMonitor.Collections;
 using OpenHardwareMonitor.Hardware;
 using ProcessInfo;
