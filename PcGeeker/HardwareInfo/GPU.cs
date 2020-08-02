@@ -92,32 +92,32 @@ namespace HardwareInfo
                             if(sensor.Name.Contains("Frame Buffer")) { FrameBufferLoad = sensor; break; }
                             if(sensor.Name.Contains("Video Engine")) { VideoEngineLoad = sensor; break; }
                             if(sensor.Name.Contains("Bus Interface")) { BusLoad = sensor; break; }
-                            MessageBox.Show("Uncaught sensor type Load sensor name = " + sensor.Name);
-                            break;
+                                Jsoner.ObjectSaver.AddObject(sensor);
+                                break;
                         }
                         case SensorType.Temperature:
                         {
                             if(sensor.Name.Contains("Core")) { CoreTemperature = sensor; break; }
-                            MessageBox.Show("Uncaught sensor type Temperature sensor name = " + sensor.Name);
-                            break;
+                                Jsoner.ObjectSaver.AddObject(sensor);
+                                break;
                         }
                         case SensorType.Clock:
                         {
                             if(sensor.Name.Contains("Shader")) { ShaderClock = sensor; break; }
                             if(sensor.Name.Contains("Core")) { CoreClock = sensor; break; }
-                            MessageBox.Show("Uncaught sensor type Clock sensor name = " + sensor.Name);
-                            break;
+                                Jsoner.ObjectSaver.AddObject(sensor);
+                                break;
                         }
                         case SensorType.Control:
                         {
                             if(sensor.Name.Contains("Fan")) { FanSpeed = sensor; break; }
-                            MessageBox.Show("Uncaught sensor type Control sensor name = " + sensor.Name);
-                            break;
+                                Jsoner.ObjectSaver.AddObject(sensor);
+                                break;
                         }
                         default:
                         {
-                            MessageBox.Show("Uncaught sensor type " + sensor.SensorType.ToString());
-                            break;
+                                Jsoner.ObjectSaver.AddObject(sensor);
+                                break;
                         }
                     }
                 }

@@ -45,7 +45,7 @@ namespace HardwareInfo
                     case SensorType.Temperature: Temperature = sensor; break;
                     case SensorType.Load: UsedSpacePercentage = sensor; break;
                     default:
-                        MessageBox.Show("Uncaught ram sensor type " + sensor.SensorType.ToString()); break;
+                        Jsoner.ObjectSaver.AddObject(sensor); break;
                 }
             }
         }

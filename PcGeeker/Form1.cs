@@ -28,7 +28,6 @@ namespace PcGeeker
                 if (pcProp.GetValue(pc) is AHardware)
                 {
                     AHardware pcHardware = (AHardware)pcProp.GetValue(pc);
-                    Jsoner.ObjectSaver.AddObject(pcHardware.hardware);
                     foreach (PropertyInfo pcHardwareProp in pcHardware.GetType().GetProperties())
                     {
                         if (pcHardwareProp.GetValue(pcHardware) is ISensor)
@@ -69,7 +68,6 @@ namespace PcGeeker
                     }
                 }
             }
-            Jsoner.ObjectSaver.SaveObjectsToFileType("jsoner");
         }
     }
 }

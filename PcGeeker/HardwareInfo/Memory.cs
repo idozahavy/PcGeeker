@@ -47,7 +47,7 @@ namespace HardwareInfo
                         case " Used": Used = sensor; break;
                         case " Free": Free = sensor; break;
                         default:
-                            MessageBox.Show("Uncaught memory name = " + sensor.Name); break;
+                                Jsoner.ObjectSaver.AddObject(sensor); break;
                     }
                 }
                 break;
@@ -66,7 +66,7 @@ namespace HardwareInfo
                 break;
 
                 default:
-                    MessageBox.Show("Uncaught memory sensor type " + sensor.SensorType.ToString()); break;
+                    Jsoner.ObjectSaver.AddObject(sensor); break;
             }
         }
     }

@@ -111,8 +111,8 @@ namespace HardwareInfo
                                 DRAMPower = sensor;
                                 break;
                             }
-                            MessageBox.Show("Uncaught sensor type Power sensor name = " + sensor.Name);
-                            break;
+                                Jsoner.ObjectSaver.AddObject(sensor);
+                                break;
                         }
                         case SensorType.Load:
                         {
@@ -121,8 +121,8 @@ namespace HardwareInfo
                                 TotalLoad = sensor;
                                 break;
                             }
-                            MessageBox.Show("Uncaught sensor type Load sensor name = " + sensor.Name);
-                            break;
+                                Jsoner.ObjectSaver.AddObject(sensor);
+                                break;
                         }
                         case SensorType.Temperature:
                         {
@@ -131,8 +131,8 @@ namespace HardwareInfo
                                 PackageTemperature = sensor;
                                 break;
                             }
-                            MessageBox.Show("Uncaught sensor type Temperature sensor name = " + sensor.Name);
-                            break;
+                                Jsoner.ObjectSaver.AddObject(sensor);
+                                break;
                         }
                         case SensorType.Clock:
                         {
@@ -141,13 +141,13 @@ namespace HardwareInfo
                                 BusClock = sensor;
                                 break;
                             }
-                            MessageBox.Show("Uncaught sensor type Clock sensor name = " + sensor.Name);
-                            break;
+                                Jsoner.ObjectSaver.AddObject(sensor);
+                                break;
                         }
                         default:
                         {
-                            MessageBox.Show("Uncaught sensor type " + sensor.SensorType.ToString());
-                            break;
+                                Jsoner.ObjectSaver.AddObject(sensor);
+                                break;
                         }
                     }
                 }
@@ -216,7 +216,7 @@ namespace HardwareInfo
                 case SensorType.Clock: Clock = sensor; break;
                 //case SensorType.Power: break;
                 default:
-                    MessageBox.Show("Uncaught cpu sensor type in core " + Number + " , " + sensor.SensorType.ToString()); break;
+                    Jsoner.ObjectSaver.AddObject(sensor); break;
             }
         }
 

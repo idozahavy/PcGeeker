@@ -86,8 +86,14 @@ namespace HardwareInfo
                     case HardwareType.Heatmaster:
                     case HardwareType.TBalancer:
                     default:
-                        MessageBox.Show("Uncaught computer hardware type " + hard.HardwareType); break;
+                        Jsoner.ObjectSaver.AddObject(hard); break;
                 }
+            }
+            if (Jsoner.ObjectSaver.ObjectsList.Count > 0)
+            {
+                Jsoner.ObjectSaver.SaveObjectsToFileType("uncaught sensors");
+                Jsoner.ObjectSaver.ClearObjects();
+                MessageBox.Show("There were some uncaught sensors");
             }
         }
 
@@ -96,7 +102,7 @@ namespace HardwareInfo
             computer.Accept(visitor);
         }
 
-        public IHardware[] GetHardware()
+        public IHardware[] GetHardwares()
         {
             return computer.Hardware;
         }

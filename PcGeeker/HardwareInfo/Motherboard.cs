@@ -104,7 +104,7 @@ namespace HardwareInfo
                     break;
                 case SensorType.Control: FanControls.Add(sensor); break;
                 default:
-                    MessageBox.Show("Uncaught motherboard sensor type = " + sensor.SensorType); break;
+                    Jsoner.ObjectSaver.AddObject(sensor); break;
             }
         }
     }
