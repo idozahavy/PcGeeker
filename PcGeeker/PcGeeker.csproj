@@ -69,6 +69,10 @@
     <Compile Include="HardwareInfo\GPUMemory.cs" />
     <Compile Include="HardwareInfo\Memory.cs" />
     <Compile Include="HardwareInfo\Motherboard.cs" />
+    <Compile Include="HardwareInfo\PCAnalyzer\CPUAnalyzer.cs" />
+    <Compile Include="HardwareInfo\PCAnalyzer\PCAnalyzer.cs" />
+    <Compile Include="HardwareInfo\PCAnalyzer\PCAnalyzerSettings.cs" />
+    <Compile Include="HardwareInfo\PCAnalyzer\SensorThresholdProperty.cs" />
     <Compile Include="HardwareInfo\Sensors.cs" />
     <Compile Include="HardwareInfo\PC.cs" />
     <Compile Include="HardwareInfo\RAM.cs" />
@@ -102,6 +106,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="HardwareInfo\Logger\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

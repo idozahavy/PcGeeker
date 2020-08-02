@@ -1,4 +1,5 @@
 ﻿using HardwareInfo;
+using HardwareInfo.PCAnalyzer;
 using OpenHardwareMonitor.Collections;
 using OpenHardwareMonitor.Hardware;
 using System;
@@ -15,12 +16,14 @@ namespace PcGeeker
 {
     public partial class Form1 : Form
     {
+        private PC pc;
+
         public Form1()
         {
             InitializeComponent();
             
             //PC pc = new PC(new ComputerVisitSetting("cpu", "gpu"));
-            PC pc = new PC(true);
+            pc = new PC(true);
             pc.Update();
             foreach(PropertyInfo pcProp in pc.GetType().GetProperties())
             {
@@ -68,6 +71,14 @@ namespace PcGeeker
                     }
                 }
             }
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            pc.Update();
+            CPUAnalyzer analyzer = new CPUAnalyzer();
+            label1.Text = analyzer.Analyze(pc.CPU);
         }
     }
 }
