@@ -12,33 +12,11 @@ namespace HardwareInfo
         private IVisitor visitor;
         private ComputerVisitSetting visitSetting;
 
-        public CPU CPU
-        {
-            get;
-            private set;
-        }
-        public GPU GPU
-        {
-            get;
-            private set;
-        }
-        public RAM RAM
-        {
-            get;
-            private set;
-        }
-
-        public List<Drive> Drives
-        {
-            get;
-            private set;
-        }
-
-        public Motherboard Motherboard
-        {
-            get;
-            private set;
-        }
+        public CPU CPU { get; private set; }
+        public GPU GPU { get; private set; }
+        public RAM RAM { get; private set; }
+        public List<Drive> Drives { get; private set; }
+        public Motherboard Motherboard { get; private set; }
 
         public PC(bool visitAll)
         {

@@ -11,47 +11,15 @@ namespace HardwareInfo
 {
     public class Motherboard : AHardware
     {
-        public IHardware Controller
-        {
-            get;
-            private set;
-        }
+        public IHardware Controller { get; private set; }
 
-        public List<ISensor> FanControls 
-        {
-            get;
-            private set;
-        }
-        public List<ISensor> Voltages
-            {
-            get;
-            private set;
-        }
-        public ISensor Voltage3p3
-        {
-            get;
-            private set;
-        }
-        public ISensor VBat
-        {
-            get;
-            private set;
-        }
-        public List<ISensor> Temperatures
-        {
-            get;
-            private set;
-        }
-        public ISensor CpuFanSpeed
-        {
-            get;
-            private set;
-        }
-        public List<ISensor> FanSpeeds
-        {
-            get;
-            private set;
-        }
+        public List<ISensor> FanControls { get; private set; }
+        public List<ISensor> Voltages { get; private set; }
+        public ISensor Voltage3p3 { get; private set; }
+        public ISensor VBat { get; private set; }
+        public List<ISensor> Temperatures { get; private set; }
+        public ISensor CpuFanSpeed { get; private set; }
+        public List<ISensor> FanSpeeds { get; private set; }
 
         public override AHardwareType HardwareType { get => AHardwareType.Motherboard; }
 

@@ -11,16 +11,8 @@ namespace HardwareInfo
 {
     public class GPUMemory : Memory
     {
-        public ISensor Load
-        {
-            get;
-            private set;
-        }
-        public ISensor Clock
-        {
-            get;
-            private set;
-        }
+        public ISensor Load { get; private set; }
+        public ISensor Clock { get; private set; }
 
         public GPUMemory() : base()
         {

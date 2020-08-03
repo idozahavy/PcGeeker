@@ -4,41 +4,12 @@ namespace HardwareInfo
 {
     public class ComputerVisitSetting
     {
-        public bool CPU
-        {
-            get;
-            private set;
-        }
-
-        public bool GPU
-        {
-            get;
-            private set;
-        }
-
-        public bool RAM
-        {
-            get;
-            private set;
-        }
-
-        public bool MOTHERBOARD
-        {
-            get;
-            private set;
-        }
-
-        public bool HDD
-        {
-            get;
-            private set;
-        }
-
-        public bool FAN
-        {
-            get;
-            private set;
-        }
+        public bool CPU { get; private set; }
+        public bool GPU { get; private set; }
+        public bool RAM { get; private set; }
+        public bool MOTHERBOARD { get; private set; }
+        public bool HDD { get; private set; }
+        public bool FAN { get; private set; }
 
         public ComputerVisitSetting(bool cpu, bool gpu, bool ram, bool motherboard, bool hdd, bool fan)
         {

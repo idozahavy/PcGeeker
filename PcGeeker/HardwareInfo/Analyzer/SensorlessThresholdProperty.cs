@@ -10,16 +10,8 @@ namespace HardwareInfo.Analyzer
 {
     public class SensorlessThresholdProperty
     {
-        public float ThresholdValue
-        {
-            get;
-            protected set;
-        }
-        public PropertyInfo Property
-        {
-            get;
-            protected set;
-        }
+        public float ThresholdValue { get; protected set; }
+        public PropertyInfo Property { get; protected set; }
 
         public SensorlessThresholdProperty(SensorlessThresholdProperty prop)
         {

@@ -8,52 +8,16 @@ namespace HardwareInfo
     public class GPU : AHardware
     {
 
-        public GPUMemory Memory
-        {
-            get;
-            private set;
-        }
+        public GPUMemory Memory { get; private set; }
 
-        public ISensor CoreTemperature
-        {
-            get;
-            private set;
-        }
-        public ISensor CoreClock
-        {
-            get;
-            private set;
-        }
-        public ISensor CoreLoad
-        {
-            get;
-            private set;
-        }
-        public ISensor ShaderClock
-        {
-            get;
-            private set;
-        }
-        public ISensor FrameBufferLoad
-        {
-            get;
-            private set;
-        }
-        public ISensor VideoEngineLoad
-        {
-            get;
-            private set;
-        }
-        public ISensor BusLoad
-        {
-            get;
-            private set;
-        }
-        public ISensor FanSpeed
-        {
-            get;
-            private set;
-        }
+        public ISensor CoreTemperature { get; private set; }
+        public ISensor CoreClock { get; private set; }
+        public ISensor CoreLoad { get; private set; }
+        public ISensor ShaderClock { get; private set; }
+        public ISensor FrameBufferLoad { get; private set; }
+        public ISensor VideoEngineLoad { get; private set; }
+        public ISensor BusLoad { get; private set; }
+        public ISensor FanSpeed{ get; private set; }
 
         public override AHardwareType HardwareType { get => AHardwareType.GPU; }
 
@@ -122,6 +86,18 @@ namespace HardwareInfo
                     }
                 }
             }
+        }
+
+        public enum GPUAttribute
+        {
+            CoreTemperature = 1,
+            CoreClock = 2,
+            CoreLoad = 3,
+            ShaderClock = 4,
+            FrameBufferLoad = 5,
+            VideoEngineLoad = 6,
+            BusLoad = 7,
+            FanSpeed = 8
         }
     }
 }

@@ -10,11 +10,7 @@ namespace HardwareInfo.Analyzer
 {
     public class SensoredThresholdProperty : SensorlessThresholdProperty
     {
-        public ISensor Sensor
-        {
-            get;
-            private set;
-        }
+        public ISensor Sensor { get; private set; }
 
         public SensoredThresholdProperty(ISensor sensor, SensorlessThresholdProperty prop) : base(prop)
         {

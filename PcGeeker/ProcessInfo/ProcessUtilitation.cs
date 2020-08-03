@@ -69,26 +69,10 @@ namespace ProcessInfo
 
     public class ProcessUtilization : IComparable<ProcessUtilization> , IEquatable<ProcessUtilization>
     {
-        public Process process
-        {
-            get;
-            private set;
-        }
-        public long LastUpdate
-        {
-            get;
-            private set;
-        }
-        public long LastTicks
-        {
-            get;
-            private set;
-        }
-        public double LastUtilization
-        {
-            get;
-            private set;
-        }
+        public Process process { get; private set; }
+        public long LastUpdate { get; private set; }
+        public long LastTicks { get; private set; }
+        public double LastUtilization { get; private set; }
 
         public ProcessUtilization(Process process)
         {

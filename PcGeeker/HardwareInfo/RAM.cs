@@ -13,19 +13,9 @@ namespace HardwareInfo
     {
         private Memory _memory;
 
-        public ISensor Used
-        {
-            get => this._memory.Used;
-        }
-        public ISensor Free
-        {
-            get => this._memory.Free;
-        }
-        public ISensor UsedPercentage
-        {
-            get;
-            private set;
-        }
+        public ISensor Used { get => this._memory.Used; }
+        public ISensor Free{ get => this._memory.Free; }
+        public ISensor UsedPercentage { get; private set; }
 
         public override AHardwareType HardwareType { get => AHardwareType.RAM; }
 

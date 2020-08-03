@@ -8,46 +8,14 @@ namespace HardwareInfo.Analyzer
 {
     public class CPUAnalyzerSettings
     {
-        public SensorlessThresholdProperty CoresPowerThreshold
-        {
-            get;
-            private set;
-        }
-        public SensorlessThresholdProperty DRAMPowerThreshold
-        {
-            get;
-            private set;
-        }
-        public SensorlessThresholdProperty GraphicsPowerThreshold
-        {
-            get;
-            private set;
-        }
-        public SensorlessThresholdProperty PackagePowerThreshold
-        {
-            get;
-            private set;
-        }
-        public SensorlessThresholdProperty BusClockThreshold
-        {
-            get;
-            private set;
-        }
-        public SensorlessThresholdProperty CoresThreshold
-        {
-            get;
-            private set;
-        }
-        public SensorlessThresholdProperty PackageTemperatureThreshold
-        {
-            get;
-            private set;
-        }
-        public SensorlessThresholdProperty TotalLoadThreshold
-        {
-            get;
-            private set;
-        }
+        public SensorlessThresholdProperty CoresPowerThreshold { get; private set; }
+        public SensorlessThresholdProperty DRAMPowerThreshold { get; private set; }
+        public SensorlessThresholdProperty GraphicsPowerThreshold { get; private set; }
+        public SensorlessThresholdProperty PackagePowerThreshold { get; private set; }
+        public SensorlessThresholdProperty BusClockThreshold { get; private set; }
+        public SensorlessThresholdProperty CoresThreshold { get; private set; }
+        public SensorlessThresholdProperty PackageTemperatureThreshold { get; private set; }
+        public SensorlessThresholdProperty TotalLoadThreshold { get; private set; }
 
         public CPUAnalyzerSettings(int coresPowerThresholdValue, int dRAMPowerThresholdValue, int graphicsPowerThresholdValue,
             int packagePowerThresholdValue, int busClockThresholdValue, int coresThresholdValue, int packageTemperatureThresholdValue, int totalLoadThresholdValue)
@@ -115,7 +83,7 @@ namespace HardwareInfo.Analyzer
                 case CPU.CPUAttribute.PackageTemperature: result = "packagetemperature"; break;
                 case CPU.CPUAttribute.TotalLoad: result = "totalload"; break;
                 default:
-                    throw new Exception("AtrributeStringThreshold attribute not found");
+                    throw new Exception("CPU AtrributeStringThreshold attribute not found");
             }
             return result + ":" + thresholdValue.ToString();
         }

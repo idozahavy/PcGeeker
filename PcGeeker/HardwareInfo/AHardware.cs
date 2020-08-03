@@ -5,11 +5,7 @@ namespace HardwareInfo
 {
     public abstract class AHardware
     {
-        public IHardware hardware
-        {
-            get;
-            private set;
-        }
+        public IHardware hardware { get; private set; }
 
         public abstract AHardwareType HardwareType { get; }
 

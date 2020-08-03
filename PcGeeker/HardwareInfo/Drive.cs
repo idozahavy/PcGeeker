@@ -11,16 +11,8 @@ namespace HardwareInfo
 {
     public class Drive : AHardware
     {
-        public ISensor Temperature
-        {
-            get;
-            private set;
-        }
-        public ISensor UsedSpacePercentage
-        {
-            get;
-            private set;
-        }
+        public ISensor Temperature { get; private set; }
+        public ISensor UsedSpacePercentage { get; private set; }
 
         public override AHardwareType HardwareType { get => AHardwareType.Drive; }
 

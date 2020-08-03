@@ -6,49 +6,17 @@ using System.Threading.Tasks;
 
 namespace HardwareInfo.Analyzer
 {
-    public class CPUAnalyzer
+    public class CPUAnalyzer : IAnalyzer<CPUAnalysis>
     {
         private CPUAnalyzerSettings settings;
-        public SensoredThresholdProperty CoresPowerThreshold
-        {
-            get;
-            private set;
-        }
-        public SensoredThresholdProperty DRAMPowerThreshold
-        {
-            get;
-            private set;
-        }
-        public SensoredThresholdProperty GraphicsPowerThreshold
-        {
-            get;
-            private set;
-        }
-        public SensoredThresholdProperty PackagePowerThreshold
-        {
-            get;
-            private set;
-        }
-        public SensoredThresholdProperty BusClockThreshold
-        {
-            get;
-            private set;
-        }
-        public SensoredThresholdProperty CoresThreshold
-        {
-            get;
-            private set;
-        }
-        public SensoredThresholdProperty PackageTemperatureThreshold
-        {
-            get;
-            private set;
-        }
-        public SensoredThresholdProperty TotalLoadThreshold
-        {
-            get;
-            private set;
-        }
+        public SensoredThresholdProperty CoresPowerThreshold { get; private set; }
+        public SensoredThresholdProperty DRAMPowerThreshold { get; private set; }
+        public SensoredThresholdProperty GraphicsPowerThreshold { get; private set; }
+        public SensoredThresholdProperty PackagePowerThreshold { get; private set; }
+        public SensoredThresholdProperty BusClockThreshold { get; private set; }
+        public SensoredThresholdProperty CoresThreshold { get; private set; }
+        public SensoredThresholdProperty PackageTemperatureThreshold { get; private set; }
+        public SensoredThresholdProperty TotalLoadThreshold { get; private set; }
 
         public CPUAnalyzer(CPU cpu, CPUAnalyzerSettings settings)
         {
@@ -63,20 +31,19 @@ namespace HardwareInfo.Analyzer
             TotalLoadThreshold = new SensoredThresholdProperty(cpu.TotalLoad, settings.TotalLoadThreshold);
         }
 
-        public string Analyze()
+        public CPUAnalysis Analyze()
         {
-            string result = "";
-
-            if (CoresPowerThreshold.IsSensorThresholded())
+            return new CPUAnalysis()
             {
-                result += "Cores power threshold reached , ";
-            }
-            if (PackageTemperatureThreshold.IsSensorThresholded())
-            {
-                result += "Package temperature threshold reached , ";
-            }
-
-            return result;
+                CoresPowerThresholded = CoresPowerThreshold.IsSensorThresholded(),
+                DRAMPowerThresholded = DRAMPowerThreshold.IsSensorThresholded(),
+                GraphicsPowerThresholded = GraphicsPowerThreshold.IsSensorThresholded(),
+                PackagePowerThresholded = PackagePowerThreshold.IsSensorThresholded(),
+                BusClockThresholded = BusClockThreshold.IsSensorThresholded(),
+                //CoresThresholded = new SensoredThresholdProperty(cpu.Cores, settings.CoresThreshold);
+                PackageTemperatureThresholded = PackageTemperatureThreshold.IsSensorThresholded(),
+                TotalLoadThresholded = TotalLoadThreshold.IsSensorThresholded()
+            };
         }
     }
 }

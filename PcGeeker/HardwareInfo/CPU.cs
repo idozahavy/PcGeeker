@@ -26,47 +26,19 @@ namespace HardwareInfo
 
         }
 
-        public ISensor PackageTemperature
-        {
-            get;
-            private set;
-        }
+        public ISensor PackageTemperature { get; private set; }
 
-        public ISensor PackagePower
-        {
-            get;
-            private set;
-        }
+        public ISensor PackagePower { get; private set; }
 
-        public ISensor TotalLoad
-        {
-            get;
-            private set;
-        }
+        public ISensor TotalLoad { get; private set; }
 
-        public ISensor CoresPower
-        {
-            get;
-            private set;
-        }
+        public ISensor CoresPower { get; private set; }
 
-        public ISensor GraphicsPower
-        {
-            get;
-            private set;
-        }
+        public ISensor GraphicsPower { get; private set; }
 
-        public ISensor DRAMPower
-        {
-            get;
-            private set;
-        }
+        public ISensor DRAMPower { get; private set; }
 
-        public ISensor BusClock
-        {
-            get;
-            private set;
-        }
+        public ISensor BusClock { get; private set; }
 
         public override AHardwareType HardwareType { get => AHardwareType.CPU; }
 

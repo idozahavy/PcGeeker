@@ -83,7 +83,7 @@ namespace PcGeeker
         {
             pc.Update();
             CPUAnalyzer analyzer = new CPUAnalyzer(pc.CPU, new CPUAnalyzerSettings("corespower:10","temp:60"));
-            label1.Text = analyzer.Analyze();
+            label1.Text = analyzer.Analyze().ToString();
         }
     }
 }
