@@ -29,14 +29,12 @@ namespace PcGeeker
             foreach(PropertyInfo pcProp in pc.GetType().GetProperties())
             {
                 
-                if (pcProp.GetValue(pc) is AHardware)
+                if (pcProp.GetValue(pc) is AHardware pcHardware)
                 {
-                    AHardware pcHardware = (AHardware)pcProp.GetValue(pc);
                     foreach (PropertyInfo pcHardwareProp in pcHardware.GetType().GetProperties())
                     {
-                        if (pcHardwareProp.GetValue(pcHardware) is ISensor)
+                        if (pcHardwareProp.GetValue(pcHardware) is ISensor sensor)
                         {
-                            ISensor sensor = (ISensor)pcHardwareProp.GetValue(pcHardware);
                             if (!Sensors.IsNull(sensor))
                             {
                                 allTabListBox.Items.Add(pcHardwareProp.Name + " = " + sensor.Value);
@@ -48,17 +46,15 @@ namespace PcGeeker
                         }
                     }
                 }
-                else if (pcProp.GetValue(pc) is List<Drive>)
+                else if (pcProp.GetValue(pc) is List<Drive> drives)
                 {
-                    List<Drive> drives = (List<Drive>)pcProp.GetValue(pc);
                     foreach (Drive drive in drives)
                     {
                         Jsoner.ObjectSaver.AddObject(drive);
                         foreach (PropertyInfo driveProp in drive.GetType().GetProperties())
                         {
-                            if (driveProp.GetValue(drive) is ISensor)
+                            if (driveProp.GetValue(drive) is ISensor sensor)
                             {
-                                ISensor sensor = (ISensor)driveProp.GetValue(drive);
                                 if (!Sensors.IsNull(sensor))
                                 {
                                     allTabListBox.Items.Add(driveProp.Name + " = " + sensor.Value);
@@ -72,17 +68,17 @@ namespace PcGeeker
                     }
                 }
             }
-            timer1.Start();
+            Timer1.Start();
 
             ProcessUtilitationCollection utils = new ProcessUtilitationCollection();
             utils.UpdateProcesses();
 
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Timer1_Tick(object sender, EventArgs e)
         {
             pc.Update();
-            CPUAnalyzer analyzer = new CPUAnalyzer(pc.CPU, new CPUAnalyzerSettings("packagepower:10","temp:60"));
+            CPUAnalyzer analyzer = new CPUAnalyzer(pc.CPU, new CPUAnalyzerSettings("packagepower:15","temp:60"));
             label1.Text = analyzer.Analyze().PackagePowerThresholded? "POWER!!!": "";
         }
     }

@@ -150,10 +150,8 @@ namespace HardwareInfo
 
     public class Core
     {
-        public int Number
-        {
-            get;
-            private set;
+        public int Number{
+            get; private set;
         }
 
         public ISensor Temperature

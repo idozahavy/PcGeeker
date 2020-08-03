@@ -25,7 +25,6 @@ namespace HardwareInfo
 
         public Motherboard(IHardware hardware) : base(hardware)
         {
-            Initialize();
             foreach (PropertyInfo prop in this.GetType().GetProperties())
             {
                 if (prop.PropertyType == typeof(ISensor))
@@ -37,6 +36,7 @@ namespace HardwareInfo
                     prop.SetValue(this, new List<ISensor>());
                 }
             }
+            Initialize();
         }
 
         internal override void Initialize()
