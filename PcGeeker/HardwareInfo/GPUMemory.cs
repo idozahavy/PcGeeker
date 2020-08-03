@@ -1,6 +1,5 @@
 ﻿using OpenHardwareMonitor.Hardware;
 using System.Reflection;
-using System.Windows.Forms;
 
 namespace HardwareInfo
 {
