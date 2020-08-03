@@ -68,6 +68,8 @@
     <Compile Include="HardwareInfo\Analyzer\GPUAnalyzer.cs" />
     <Compile Include="HardwareInfo\Analyzer\CPUAnalyzerSettings.cs" />
     <Compile Include="HardwareInfo\Analyzer\GPUAnalyzerSettings.cs" />
+    <Compile Include="HardwareInfo\Analyzer\IAnalysis.cs" />
+    <Compile Include="HardwareInfo\Analyzer\IAnalyzer.cs" />
     <Compile Include="HardwareInfo\Analyzer\SensorlessThresholdProperty.cs" />
     <Compile Include="HardwareInfo\CPU.cs" />
     <Compile Include="HardwareInfo\Drive.cs" />
