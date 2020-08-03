@@ -1,10 +1,4 @@
 ﻿using OpenHardwareMonitor.Hardware;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HardwareInfo.Analyzer
 {
@@ -21,7 +15,10 @@ namespace HardwareInfo.Analyzer
         {
             this.Sensor = sensor;
         }
-        public SensoredThresholdProperty(ISensor sensor, float thresholdValue) : this(sensor, "Value", thresholdValue) { }
+
+        public SensoredThresholdProperty(ISensor sensor, float thresholdValue) : this(sensor, "Value", thresholdValue)
+        {
+        }
 
         public bool IsSensorThresholded()
         {

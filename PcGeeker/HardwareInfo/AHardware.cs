@@ -5,18 +5,18 @@ namespace HardwareInfo
 {
     public abstract class AHardware
     {
-        public IHardware hardware { get; private set; }
+        public IHardware Hardware { get; private set; }
 
         public abstract AHardwareType HardwareType { get; }
 
         public AHardware(IHardware hardware)
         {
-            this.hardware = hardware;
+            Hardware = hardware;
         }
 
         public void Update(IVisitor visitor)
         {
-            hardware.Accept(visitor);
+            Hardware.Accept(visitor);
         }
 
         internal abstract void Initialize();
@@ -32,13 +32,22 @@ namespace HardwareInfo
 
         public Type AHardwareTypeRedirect(AHardwareType type)
         {
-            switch (type)
+            switch(type)
             {
-                case AHardwareType.CPU: return typeof(CPU);
-                case AHardwareType.GPU: return typeof(GPU);
-                case AHardwareType.RAM: return typeof(RAM);
-                case AHardwareType.Drive: return typeof(Drive);
-                case AHardwareType.Motherboard: return typeof(Motherboard);
+                case AHardwareType.CPU:
+                    return typeof(CPU);
+
+                case AHardwareType.GPU:
+                    return typeof(GPU);
+
+                case AHardwareType.RAM:
+                    return typeof(RAM);
+
+                case AHardwareType.Drive:
+                    return typeof(Drive);
+
+                case AHardwareType.Motherboard:
+                    return typeof(Motherboard);
             }
             return null;
         }

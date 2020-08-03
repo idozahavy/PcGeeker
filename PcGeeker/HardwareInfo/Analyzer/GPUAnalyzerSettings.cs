@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HardwareInfo.Analyzer
 {
@@ -23,29 +19,52 @@ namespace HardwareInfo.Analyzer
         /// <param name="args">Format for every string is 'gpuAttributeName:thresholdValue'</param>
         public GPUAnalyzerSettings(params string[] args)
         {
-            foreach (string arg in args)
+            foreach(string arg in args)
             {
                 string[] segments = arg.Split(':');
-                if (segments.Length < 2)
+                if(segments.Length < 2)
                 {
                     continue;
                 }
-                switch (segments[0].ToLower())
+                switch(segments[0].ToLower())
                 {
                     case "bus":
-                    case "busload": BusLoadThreshold = new SensorlessThresholdProperty(float.Parse(segments[1])); break;
-                    case "coreclock": CoreClockThreshold = new SensorlessThresholdProperty(float.Parse(segments[1])); break;
-                    case "coreload": CoreLoadThreshold = new SensorlessThresholdProperty(float.Parse(segments[1])); break;
+                    case "busload":
+                        BusLoadThreshold = new SensorlessThresholdProperty(float.Parse(segments[1]));
+                        break;
+
+                    case "coreclock":
+                        CoreClockThreshold = new SensorlessThresholdProperty(float.Parse(segments[1]));
+                        break;
+
+                    case "coreload":
+                        CoreLoadThreshold = new SensorlessThresholdProperty(float.Parse(segments[1]));
+                        break;
+
                     case "temp":
-                    case "coretemperature": CoreTemperatureThreshold = new SensorlessThresholdProperty(float.Parse(segments[1])); break;
+                    case "coretemperature":
+                        CoreTemperatureThreshold = new SensorlessThresholdProperty(float.Parse(segments[1]));
+                        break;
+
                     case "fan":
-                    case "fanspeed": FanSpeedThreshold = new SensorlessThresholdProperty(float.Parse(segments[1])); break;
+                    case "fanspeed":
+                        FanSpeedThreshold = new SensorlessThresholdProperty(float.Parse(segments[1]));
+                        break;
+
                     case "shaderbuffer":
-                    case "framebufferload": FrameBufferLoadThreshold = new SensorlessThresholdProperty(float.Parse(segments[1])); break;
-                    case "shaderclock": ShaderClockThreshold = new SensorlessThresholdProperty(float.Parse(segments[1])); break;
+                    case "framebufferload":
+                        FrameBufferLoadThreshold = new SensorlessThresholdProperty(float.Parse(segments[1]));
+                        break;
+
+                    case "shaderclock":
+                        ShaderClockThreshold = new SensorlessThresholdProperty(float.Parse(segments[1]));
+                        break;
+
                     case "engineload":
                     case "video":
-                    case "videoengineload": VideoEngineLoadThreshold = new SensorlessThresholdProperty(float.Parse(segments[1])); break;
+                    case "videoengineload":
+                        VideoEngineLoadThreshold = new SensorlessThresholdProperty(float.Parse(segments[1]));
+                        break;
                 }
             }
         }
@@ -53,16 +72,40 @@ namespace HardwareInfo.Analyzer
         public string AtrributeStringThreshold(GPU.GPUAttribute attr, float thresholdValue)
         {
             string result;
-            switch (attr)
+            switch(attr)
             {
-                case GPU.GPUAttribute.BusLoad: result = "busload"; break;
-                case GPU.GPUAttribute.CoreClock: result = "coreclock"; break;
-                case GPU.GPUAttribute.CoreLoad: result = "coreload"; break;
-                case GPU.GPUAttribute.CoreTemperature: result = "coretemperature"; break;
-                case GPU.GPUAttribute.FanSpeed: result = "fanspeed"; break;
-                case GPU.GPUAttribute.FrameBufferLoad: result = "framebufferload"; break;
-                case GPU.GPUAttribute.ShaderClock: result = "shaderclock"; break;
-                case GPU.GPUAttribute.VideoEngineLoad: result = "videoengineload"; break;
+                case GPU.GPUAttribute.BusLoad:
+                    result = "busload";
+                    break;
+
+                case GPU.GPUAttribute.CoreClock:
+                    result = "coreclock";
+                    break;
+
+                case GPU.GPUAttribute.CoreLoad:
+                    result = "coreload";
+                    break;
+
+                case GPU.GPUAttribute.CoreTemperature:
+                    result = "coretemperature";
+                    break;
+
+                case GPU.GPUAttribute.FanSpeed:
+                    result = "fanspeed";
+                    break;
+
+                case GPU.GPUAttribute.FrameBufferLoad:
+                    result = "framebufferload";
+                    break;
+
+                case GPU.GPUAttribute.ShaderClock:
+                    result = "shaderclock";
+                    break;
+
+                case GPU.GPUAttribute.VideoEngineLoad:
+                    result = "videoengineload";
+                    break;
+
                 default:
                     throw new Exception("GPU AtrributeStringThreshold attribute not found");
             }

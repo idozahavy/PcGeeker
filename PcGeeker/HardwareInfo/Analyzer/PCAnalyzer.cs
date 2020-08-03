@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HardwareInfo.Analyzer
+﻿namespace HardwareInfo.Analyzer
 {
     public class PCAnalyzer
     {
@@ -14,7 +8,8 @@ namespace HardwareInfo.Analyzer
 
         public PCAnalyzer(PC pc, string savePath, PCAnalyzerSettings settings)
         {
-            if (settings.CPU) {
+            if(settings.CPU)
+            {
                 CPU = new CPUAnalyzer(pc.CPU, settings.CPUSettings);
             }
         }

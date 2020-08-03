@@ -1,13 +1,10 @@
 ﻿using OpenHardwareMonitor.Hardware;
-using System;
 using System.Reflection;
-using System.Windows.Forms;
 
 namespace HardwareInfo
 {
     public class GPU : AHardware
     {
-
         public GPUMemory Memory { get; private set; }
 
         public ISensor CoreTemperature { get; private set; }
@@ -17,16 +14,16 @@ namespace HardwareInfo
         public ISensor FrameBufferLoad { get; private set; }
         public ISensor VideoEngineLoad { get; private set; }
         public ISensor BusLoad { get; private set; }
-        public ISensor FanSpeed{ get; private set; }
+        public ISensor FanSpeed { get; private set; }
 
         public override AHardwareType HardwareType { get => AHardwareType.GPU; }
 
         public GPU(IHardware hardware) : base(hardware)
         {
-            Initialize();          
+            Initialize();
             foreach(PropertyInfo prop in this.GetType().GetProperties())
             {
-                if (prop.PropertyType == typeof(ISensor))
+                if(prop.PropertyType == typeof(ISensor))
                 {
                     prop.SetValue(this, Sensors.NAIfNull((ISensor)prop.GetValue(this)));
                 }
@@ -36,7 +33,7 @@ namespace HardwareInfo
         internal override void Initialize()
         {
             Memory = null;
-            foreach(ISensor sensor in hardware.Sensors)
+            foreach(ISensor sensor in Hardware.Sensors)
             {
                 if(sensor.Name.Contains("Memory"))
                 {
@@ -52,36 +49,44 @@ namespace HardwareInfo
                     {
                         case SensorType.Load:
                         {
-                            if(sensor.Name.Contains("Core")) { CoreLoad = sensor; break; }
-                            if(sensor.Name.Contains("Frame Buffer")) { FrameBufferLoad = sensor; break; }
-                            if(sensor.Name.Contains("Video Engine")) { VideoEngineLoad = sensor; break; }
-                            if(sensor.Name.Contains("Bus Interface")) { BusLoad = sensor; break; }
-                                Jsoner.ObjectSaver.AddObject(sensor);
-                                break;
+                            if(sensor.Name.Contains("Core"))
+                            { CoreLoad = sensor; break; }
+                            if(sensor.Name.Contains("Frame Buffer"))
+                            { FrameBufferLoad = sensor; break; }
+                            if(sensor.Name.Contains("Video Engine"))
+                            { VideoEngineLoad = sensor; break; }
+                            if(sensor.Name.Contains("Bus Interface"))
+                            { BusLoad = sensor; break; }
+                            Jsoner.ObjectSaver.AddObject(sensor);
+                            break;
                         }
                         case SensorType.Temperature:
                         {
-                            if(sensor.Name.Contains("Core")) { CoreTemperature = sensor; break; }
-                                Jsoner.ObjectSaver.AddObject(sensor);
-                                break;
+                            if(sensor.Name.Contains("Core"))
+                            { CoreTemperature = sensor; break; }
+                            Jsoner.ObjectSaver.AddObject(sensor);
+                            break;
                         }
                         case SensorType.Clock:
                         {
-                            if(sensor.Name.Contains("Shader")) { ShaderClock = sensor; break; }
-                            if(sensor.Name.Contains("Core")) { CoreClock = sensor; break; }
-                                Jsoner.ObjectSaver.AddObject(sensor);
-                                break;
+                            if(sensor.Name.Contains("Shader"))
+                            { ShaderClock = sensor; break; }
+                            if(sensor.Name.Contains("Core"))
+                            { CoreClock = sensor; break; }
+                            Jsoner.ObjectSaver.AddObject(sensor);
+                            break;
                         }
                         case SensorType.Control:
                         {
-                            if(sensor.Name.Contains("Fan")) { FanSpeed = sensor; break; }
-                                Jsoner.ObjectSaver.AddObject(sensor);
-                                break;
+                            if(sensor.Name.Contains("Fan"))
+                            { FanSpeed = sensor; break; }
+                            Jsoner.ObjectSaver.AddObject(sensor);
+                            break;
                         }
                         default:
                         {
-                                Jsoner.ObjectSaver.AddObject(sensor);
-                                break;
+                            Jsoner.ObjectSaver.AddObject(sensor);
+                            break;
                         }
                     }
                 }

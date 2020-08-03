@@ -1,10 +1,5 @@
 ﻿using OpenHardwareMonitor.Hardware;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HardwareInfo.Analyzer
 {
@@ -15,7 +10,7 @@ namespace HardwareInfo.Analyzer
 
         public SensorlessThresholdProperty(SensorlessThresholdProperty prop)
         {
-            if (prop == null)
+            if(prop == null)
             {
                 return;
             }
@@ -25,13 +20,14 @@ namespace HardwareInfo.Analyzer
 
         public SensorlessThresholdProperty(string FloatPropertyName, float thresholdValue)
         {
-            if (FloatPropertyName == null)
+            if(FloatPropertyName == null)
             {
                 return;
             }
             this.Property = typeof(ISensor).GetProperty(FloatPropertyName, typeof(float?));
             this.ThresholdValue = thresholdValue;
         }
+
         /// <summary>
         /// Threshold the sensor Value
         /// </summary>
@@ -39,12 +35,12 @@ namespace HardwareInfo.Analyzer
 
         public bool IsSensorThresholded(ISensor sensor)
         {
-            if (sensor == null || Property == null)
+            if(sensor == null || Property == null)
             {
                 return false;
             }
             object sensorValue = Property.GetValue(sensor);
-            if (sensorValue != null)
+            if(sensorValue != null)
             {
                 return (float)Property.GetValue(sensor) >= ThresholdValue;
             }

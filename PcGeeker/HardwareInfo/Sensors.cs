@@ -2,17 +2,14 @@
 using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HardwareInfo
 {
-    class Sensors
+    internal class Sensors
     {
         public static ISensor NAIfNull(ISensor sensor)
         {
-            if (sensor == null)
+            if(sensor == null)
             {
                 return new NASensor();
             }
@@ -24,7 +21,7 @@ namespace HardwareInfo
             return sensor == null || sensor.GetType() == typeof(NASensor);
         }
 
-        class NASensor: ISensor
+        private class NASensor : ISensor
         {
             public NASensor()
             {

@@ -2,17 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Windows.Forms;
 
 namespace HardwareInfo
 {
     public class CPU : AHardware
     {
-        public Dictionary<int, Core> Cores
-        {
-            get;
-            private set;
-        }
+        public Dictionary<int, Core> Cores { get; private set; }
 
         public enum CPUAttribute
         {
@@ -23,7 +18,6 @@ namespace HardwareInfo
             GraphicsPower = 5,
             DRAMPower = 6,
             BusClock = 7
-
         }
 
         public ISensor PackageTemperature { get; private set; }
@@ -46,9 +40,9 @@ namespace HardwareInfo
         {
             Cores = new Dictionary<int, Core>();
             Initialize();
-            foreach (PropertyInfo prop in this.GetType().GetProperties())
+            foreach(PropertyInfo prop in this.GetType().GetProperties())
             {
-                if (prop.PropertyType == typeof(ISensor))
+                if(prop.PropertyType == typeof(ISensor))
                 {
                     prop.SetValue(this, Sensors.NAIfNull((ISensor)prop.GetValue(this)));
                 }
@@ -57,7 +51,7 @@ namespace HardwareInfo
 
         internal override void Initialize()
         {
-            foreach(ISensor sensor in hardware.Sensors)
+            foreach(ISensor sensor in Hardware.Sensors)
             {
                 if(sensor.Name.Contains("Core #"))
                 {
@@ -95,8 +89,8 @@ namespace HardwareInfo
                                 DRAMPower = sensor;
                                 break;
                             }
-                                Jsoner.ObjectSaver.AddObject(sensor);
-                                break;
+                            Jsoner.ObjectSaver.AddObject(sensor);
+                            break;
                         }
                         case SensorType.Load:
                         {
@@ -105,8 +99,8 @@ namespace HardwareInfo
                                 TotalLoad = sensor;
                                 break;
                             }
-                                Jsoner.ObjectSaver.AddObject(sensor);
-                                break;
+                            Jsoner.ObjectSaver.AddObject(sensor);
+                            break;
                         }
                         case SensorType.Temperature:
                         {
@@ -115,8 +109,8 @@ namespace HardwareInfo
                                 PackageTemperature = sensor;
                                 break;
                             }
-                                Jsoner.ObjectSaver.AddObject(sensor);
-                                break;
+                            Jsoner.ObjectSaver.AddObject(sensor);
+                            break;
                         }
                         case SensorType.Clock:
                         {
@@ -125,13 +119,13 @@ namespace HardwareInfo
                                 BusClock = sensor;
                                 break;
                             }
-                                Jsoner.ObjectSaver.AddObject(sensor);
-                                break;
+                            Jsoner.ObjectSaver.AddObject(sensor);
+                            break;
                         }
                         default:
                         {
-                                Jsoner.ObjectSaver.AddObject(sensor);
-                                break;
+                            Jsoner.ObjectSaver.AddObject(sensor);
+                            break;
                         }
                     }
                 }
@@ -150,27 +144,12 @@ namespace HardwareInfo
 
     public class Core
     {
-        public int Number{
-            get; private set;
-        }
+        public int Number { get; private set; }
 
-        public ISensor Temperature
-        {
-            get;
-            private set;
-        }
+        public ISensor Temperature { get; private set; }
 
-        public ISensor Load
-        {
-            get;
-            private set;
-        }
-
-        public ISensor Clock
-        {
-            get;
-            private set;
-        }
+        public ISensor Load { get; private set; }
+        public ISensor Clock { get; private set; }
 
         public Core(int number)
         {
@@ -193,12 +172,21 @@ namespace HardwareInfo
             }
             switch(sensor.SensorType)
             {
-                case SensorType.Load: Load = sensor; break;
-                case SensorType.Temperature: Temperature = sensor; break;
-                case SensorType.Clock: Clock = sensor; break;
+                case SensorType.Load:
+                    Load = sensor;
+                    break;
+
+                case SensorType.Temperature:
+                    Temperature = sensor;
+                    break;
+
+                case SensorType.Clock:
+                    Clock = sensor;
+                    break;
                 //case SensorType.Power: break;
                 default:
-                    Jsoner.ObjectSaver.AddObject(sensor); break;
+                    Jsoner.ObjectSaver.AddObject(sensor);
+                    break;
             }
         }
 
@@ -206,10 +194,17 @@ namespace HardwareInfo
         {
             switch(sensorType)
             {
-                case SensorType.Clock: return Clock;
-                case SensorType.Temperature: return Temperature;
-                case SensorType.Load: return Load;
-                default: return null;
+                case SensorType.Clock:
+                    return Clock;
+
+                case SensorType.Temperature:
+                    return Temperature;
+
+                case SensorType.Load:
+                    return Load;
+
+                default:
+                    return null;
             }
         }
     }

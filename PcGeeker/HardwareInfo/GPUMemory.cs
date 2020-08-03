@@ -1,10 +1,5 @@
 ﻿using OpenHardwareMonitor.Hardware;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HardwareInfo
@@ -16,9 +11,9 @@ namespace HardwareInfo
 
         public GPUMemory() : base()
         {
-            foreach (PropertyInfo prop in this.GetType().GetProperties())
+            foreach(PropertyInfo prop in this.GetType().GetProperties())
             {
-                if (prop.PropertyType == typeof(ISensor))
+                if(prop.PropertyType == typeof(ISensor))
                 {
                     prop.SetValue(this, Sensors.NAIfNull((ISensor)prop.GetValue(this)));
                 }
@@ -29,11 +24,21 @@ namespace HardwareInfo
         {
             switch(sensor.SensorType)
             {
-                case SensorType.Clock: Clock = sensor; break;
-                case SensorType.Load: Load = sensor; break;
-                case SensorType.SmallData: base.Initialize(sensor); break;
+                case SensorType.Clock:
+                    Clock = sensor;
+                    break;
+
+                case SensorType.Load:
+                    Load = sensor;
+                    break;
+
+                case SensorType.SmallData:
+                    base.Initialize(sensor);
+                    break;
+
                 default:
-                    MessageBox.Show("Uncaught gpu memory type = " + sensor.SensorType); break;
+                    Jsoner.ObjectSaver.AddObject(sensor);
+                    break;
             }
         }
     }

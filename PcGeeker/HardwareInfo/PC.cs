@@ -1,6 +1,4 @@
-﻿using OpenHardwareMonitor.Collections;
-using OpenHardwareMonitor.Hardware;
-using System;
+﻿using OpenHardwareMonitor.Hardware;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -50,24 +48,40 @@ namespace HardwareInfo
 
         private void InitializeComputerHardwares()
         {
-            foreach (IHardware hard in computer.Hardware)
+            foreach(IHardware hard in computer.Hardware)
             {
-                switch (hard.HardwareType)
+                switch(hard.HardwareType)
                 {
-                    case HardwareType.CPU: this.CPU = new CPU(hard); break;
+                    case HardwareType.CPU:
+                        this.CPU = new CPU(hard);
+                        break;
+
                     case HardwareType.GpuAti:
-                    case HardwareType.GpuNvidia: this.GPU = new GPU(hard); break;
-                    case HardwareType.HDD: this.Drives.Add(new Drive(hard)); break;
-                    case HardwareType.Mainboard: this.Motherboard = new Motherboard(hard); break;
-                    case HardwareType.RAM: this.RAM = new RAM(hard); break;
+                    case HardwareType.GpuNvidia:
+                        this.GPU = new GPU(hard);
+                        break;
+
+                    case HardwareType.HDD:
+                        this.Drives.Add(new Drive(hard));
+                        break;
+
+                    case HardwareType.Mainboard:
+                        this.Motherboard = new Motherboard(hard);
+                        break;
+
+                    case HardwareType.RAM:
+                        this.RAM = new RAM(hard);
+                        break;
+
                     case HardwareType.SuperIO:
                     case HardwareType.Heatmaster:
                     case HardwareType.TBalancer:
                     default:
-                        Jsoner.ObjectSaver.AddObject(hard); break;
+                        Jsoner.ObjectSaver.AddObject(hard);
+                        break;
                 }
             }
-            if (Jsoner.ObjectSaver.ObjectsList.Count > 0)
+            if(Jsoner.ObjectSaver.ObjectsList.Count > 0)
             {
                 Jsoner.ObjectSaver.SaveObjectsToFileType("uncaught sensors");
                 Jsoner.ObjectSaver.ClearObjects();

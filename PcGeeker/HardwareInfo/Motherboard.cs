@@ -1,11 +1,7 @@
 ﻿using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace HardwareInfo
 {
@@ -25,13 +21,13 @@ namespace HardwareInfo
 
         public Motherboard(IHardware hardware) : base(hardware)
         {
-            foreach (PropertyInfo prop in this.GetType().GetProperties())
+            foreach(PropertyInfo prop in this.GetType().GetProperties())
             {
-                if (prop.PropertyType == typeof(ISensor))
+                if(prop.PropertyType == typeof(ISensor))
                 {
                     prop.SetValue(this, Sensors.NAIfNull((ISensor)prop.GetValue(this)));
                 }
-                else if (prop.PropertyType == typeof(List<ISensor>))
+                else if(prop.PropertyType == typeof(List<ISensor>))
                 {
                     prop.SetValue(this, new List<ISensor>());
                 }
@@ -41,16 +37,16 @@ namespace HardwareInfo
 
         internal override void Initialize()
         {
-            Controller = hardware;
-            foreach (ISensor sensor in hardware.Sensors)
+            Controller = Hardware;
+            foreach(ISensor sensor in Hardware.Sensors)
             {
                 this.Initialize(sensor);
                 Console.WriteLine(sensor.Name);
             }
-            foreach (IHardware subHardware in hardware.SubHardware)
+            foreach(IHardware subHardware in Hardware.SubHardware)
             {
                 Controller = subHardware;
-                foreach (ISensor sensor in subHardware.Sensors)
+                foreach(ISensor sensor in subHardware.Sensors)
                 {
                     this.Initialize(sensor);
                 }
@@ -59,20 +55,35 @@ namespace HardwareInfo
 
         private void Initialize(ISensor sensor)
         {
-            switch (sensor.SensorType)
+            switch(sensor.SensorType)
             {
-                case SensorType.Temperature: Temperatures.Add(sensor); break;
-                case SensorType.Voltage: if (sensor.Name.Contains("+3.3V")) { Voltage3p3 = sensor; }
-                    else if (sensor.Name.Contains("VBat")) { VBat = sensor; }
-                    else { Voltages.Add(sensor); }
+                case SensorType.Temperature:
+                    Temperatures.Add(sensor);
                     break;
+
+                case SensorType.Voltage:
+                    if(sensor.Name.Contains("+3.3V"))
+                    { Voltage3p3 = sensor; }
+                    else if(sensor.Name.Contains("VBat"))
+                    { VBat = sensor; }
+                    else
+                    { Voltages.Add(sensor); }
+                    break;
+
                 case SensorType.Fan:
-                    if (sensor.Name.EndsWith("#1")) { CpuFanSpeed = sensor;  }
-                    else { FanSpeeds.Add(sensor); }
+                    if(sensor.Name.EndsWith("#1"))
+                    { CpuFanSpeed = sensor; }
+                    else
+                    { FanSpeeds.Add(sensor); }
                     break;
-                case SensorType.Control: FanControls.Add(sensor); break;
+
+                case SensorType.Control:
+                    FanControls.Add(sensor);
+                    break;
+
                 default:
-                    Jsoner.ObjectSaver.AddObject(sensor); break;
+                    Jsoner.ObjectSaver.AddObject(sensor);
+                    break;
             }
         }
     }

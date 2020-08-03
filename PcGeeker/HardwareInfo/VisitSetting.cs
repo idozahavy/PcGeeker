@@ -36,25 +36,37 @@ namespace HardwareInfo
             {
                 switch(arg.ToLower())
                 {
-                    case "cpu": this.CPU = true; break;
+                    case "cpu":
+                        this.CPU = true;
+                        break;
 
                     case "graphic":
                     case "graphics":
-                    case "gpu": this.GPU = true; break;
+                    case "gpu":
+                        this.GPU = true;
+                        break;
 
                     case "memory":
-                    case "ram": this.RAM = true; break;
+                    case "ram":
+                        this.RAM = true;
+                        break;
 
                     case "mb":
                     case "mainboard":
-                    case "motherboard": this.MOTHERBOARD = true; break;
+                    case "motherboard":
+                        this.MOTHERBOARD = true;
+                        break;
 
                     case "ssd":
                     case "hdd":
-                    case "drive": this.HDD = true; break;
+                    case "drive":
+                        this.HDD = true;
+                        break;
 
                     case "fans":
-                    case "fan": this.FAN = true; break;
+                    case "fan":
+                        this.FAN = true;
+                        break;
                 }
             }
         }
