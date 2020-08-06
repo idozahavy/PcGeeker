@@ -1,6 +1,10 @@
-﻿namespace HardwareInfo.Analyzer
+﻿using HardwareInfo.HardwareBases;
+using System;
+using System.Reflection;
+
+namespace HardwareInfo.Analyzer
 {
-    public abstract class Analysis
+    public interface IAnalysis
     {
     }
 }

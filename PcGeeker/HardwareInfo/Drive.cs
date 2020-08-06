@@ -1,28 +1,32 @@
-﻿using OpenHardwareMonitor.Hardware;
+﻿using HardwareInfo.HardwareBases;
+using OpenHardwareMonitor.Hardware;
 using System.Reflection;
 
 namespace HardwareInfo
 {
-    public class Drive : AHardware
+    public class Drive : BaseDrive<ISensor>, IHardwareable
     {
-        public ISensor Temperature { get; private set; }
-        public ISensor UsedSpacePercentage { get; private set; }
+        public IHardware Hardware { get; private set; }
 
-        public override AHardwareType HardwareType { get => AHardwareType.Drive; }
-
-        public Drive(IHardware hardware) : base(hardware)
+        public Drive(IHardware hardware)
         {
+            Hardware = hardware;
             Initialize();
             foreach(PropertyInfo prop in this.GetType().GetProperties())
             {
                 if(prop.PropertyType == typeof(ISensor))
                 {
-                    prop.SetValue(this, Sensors.NAIfNull((ISensor)prop.GetValue(this)));
+                    prop.SetValue(this, SensorTool.NAIfNull((ISensor)prop.GetValue(this)));
                 }
             }
         }
 
-        internal override void Initialize()
+        public void Update(IVisitor visitor)
+        {
+            Hardware.Accept(visitor);
+        }
+
+        public void Initialize()
         {
             foreach(ISensor sensor in Hardware.Sensors)
             {
@@ -33,7 +37,7 @@ namespace HardwareInfo
                         break;
 
                     case SensorType.Load:
-                        UsedSpacePercentage = sensor;
+                        UsedPercentage = sensor;
                         break;
 
                     default:

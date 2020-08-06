@@ -1,33 +1,39 @@
-﻿using OpenHardwareMonitor.Hardware;
+﻿using HardwareInfo.HardwareBases;
+using HardwareInfo.Sensor;
+using OpenHardwareMonitor.Hardware;
 using System.Reflection;
 
 namespace HardwareInfo
 {
-    public class RAM : AHardware
+    public class RAM : BaseRAM<ISensor>, IHardwareable
     {
-        private Memory _memory;
+        public IHardware Hardware { get; private set; }
 
-        public ISensor Used { get => this._memory.Used; }
-        public ISensor Free { get => this._memory.Free; }
-        public ISensor UsedPercentage { get; private set; }
-
-        public override AHardwareType HardwareType { get => AHardwareType.RAM; }
-
-        public RAM(IHardware hardware) : base(hardware)
+        public RAM(IHardware hardware)
         {
+            Hardware = hardware;
             Initialize();
             foreach(PropertyInfo prop in this.GetType().GetProperties())
             {
                 if(prop.PropertyType == typeof(ISensor) && prop.SetMethod != null)
                 {
-                    prop.SetValue(this, Sensors.NAIfNull((ISensor)prop.GetValue(this)));
+                    prop.SetValue(this, SensorTool.NAIfNull((ISensor)prop.GetValue(this)));
                 }
             }
         }
 
-        internal override void Initialize()
+        public void Update(IVisitor visitor)
         {
-            _memory = new Memory();
+            Hardware.Accept(visitor);
+            if (Total is UpdateSensor total)
+            {
+                total.InvokeUpdate();
+            }
+        }
+
+        public void Initialize()
+        {
+            Total = new UpdateSensor(ValueSensorUpdate);
             foreach(ISensor sensor in Hardware.Sensors)
             {
                 switch(sensor.SensorType)
@@ -37,7 +43,20 @@ namespace HardwareInfo
                         break;
 
                     case SensorType.Data:
-                        _memory.Initialize(sensor);
+                    {
+                        if(sensor.Name.StartsWith("Used"))
+                        {
+                            Used = sensor;
+                        }
+                        else if(sensor.Name.StartsWith("Avail"))
+                        {
+                            Available = sensor;
+                        }
+                        else
+                        {
+                            Jsoner.ObjectSaver.AddObject(sensor);
+                        }
+                    }
                         break;
 
                     default:
@@ -46,5 +65,21 @@ namespace HardwareInfo
                 }
             }
         }
+
+        private void ValueSensorUpdate(UpdateSensor self)
+        {
+            if (Used != null && Available !=null)
+            {
+                self.SensorType = SensorType.Data;
+                self.Value = Used.Value + Available.Value;
+                self.Min = Used.Min + Available.Min;
+                self.Max = Used.Max + Available.Max;
+                self.Name = "Total Memory";
+                self.Hardware = Hardware;
+                self.IsDefaultHidden = true;
+            }
+        }
+
+        
     }
 }

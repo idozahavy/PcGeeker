@@ -1,4 +1,6 @@
-﻿namespace HardwareInfo.Analyzer
+﻿using HardwareInfo.Analyzer.CPUAnalyze;
+
+namespace HardwareInfo.Analyzer
 {
     public class PCAnalyzer
     {

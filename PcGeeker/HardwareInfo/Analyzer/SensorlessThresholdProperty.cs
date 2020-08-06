@@ -18,20 +18,23 @@ namespace HardwareInfo.Analyzer
             this.ThresholdValue = prop.ThresholdValue;
         }
 
-        public SensorlessThresholdProperty(string FloatPropertyName, float thresholdValue)
+        public SensorlessThresholdProperty(string FloatPropertyName, float? thresholdValue)
         {
-            if(FloatPropertyName == null)
+            if(thresholdValue is float value)
             {
-                return;
+                if(FloatPropertyName == null)
+                {
+                    return;
+                }
+                this.Property = typeof(ISensor).GetProperty(FloatPropertyName, typeof(float?));
+                this.ThresholdValue = value;
             }
-            this.Property = typeof(ISensor).GetProperty(FloatPropertyName, typeof(float?));
-            this.ThresholdValue = thresholdValue;
         }
 
         /// <summary>
         /// Threshold the sensor Value
         /// </summary>
-        public SensorlessThresholdProperty(float thresholdValue) : this("Value", thresholdValue) { }
+        public SensorlessThresholdProperty(float? thresholdValue) : this("Value", thresholdValue) { }
 
         public bool IsSensorThresholded(ISensor sensor)
         {

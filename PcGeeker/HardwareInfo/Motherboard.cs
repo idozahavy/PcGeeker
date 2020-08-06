@@ -1,41 +1,38 @@
-﻿using OpenHardwareMonitor.Hardware;
+﻿using HardwareInfo.HardwareBases;
+using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace HardwareInfo
 {
-    public class Motherboard : AHardware
+    public class Motherboard : BaseMotherboard<ISensor>, IHardwareable
     {
         public IHardware Controller { get; private set; }
 
-        public List<ISensor> FanControls { get; private set; }
-        public List<ISensor> Voltages { get; private set; }
-        public ISensor Voltage3p3 { get; private set; }
-        public ISensor VBat { get; private set; }
-        public List<ISensor> Temperatures { get; private set; }
-        public ISensor CpuFanSpeed { get; private set; }
-        public List<ISensor> FanSpeeds { get; private set; }
+        public IHardware Hardware { get; private set; }
 
-        public override AHardwareType HardwareType { get => AHardwareType.Motherboard; }
-
-        public Motherboard(IHardware hardware) : base(hardware)
+        public Motherboard(IHardware hardware)
         {
+            Hardware = hardware;
             foreach(PropertyInfo prop in this.GetType().GetProperties())
             {
-                if(prop.PropertyType == typeof(ISensor))
-                {
-                    prop.SetValue(this, Sensors.NAIfNull((ISensor)prop.GetValue(this)));
-                }
-                else if(prop.PropertyType == typeof(List<ISensor>))
+                if(prop.PropertyType == typeof(List<ISensor>))
                 {
                     prop.SetValue(this, new List<ISensor>());
                 }
             }
             Initialize();
+            foreach(PropertyInfo prop in this.GetType().GetProperties())
+            {
+                if(prop.PropertyType == typeof(ISensor))
+                {
+                    prop.SetValue(this, SensorTool.NAIfNull((ISensor)prop.GetValue(this)));
+                }
+            }
         }
 
-        internal override void Initialize()
+        public void Initialize()
         {
             Controller = Hardware;
             foreach(ISensor sensor in Hardware.Sensors)
@@ -49,6 +46,10 @@ namespace HardwareInfo
                 foreach(ISensor sensor in subHardware.Sensors)
                 {
                     this.Initialize(sensor);
+                }
+                if(Hardware.SubHardware.Length > 1)
+                {
+                    Jsoner.ObjectSaver.AddObject(subHardware);
                 }
             }
         }
@@ -85,6 +86,11 @@ namespace HardwareInfo
                     Jsoner.ObjectSaver.AddObject(sensor);
                     break;
             }
+        }
+
+        public void Update(IVisitor visitor)
+        {
+            Hardware.Accept(visitor);
         }
     }
 }

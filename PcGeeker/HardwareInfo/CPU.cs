@@ -1,55 +1,32 @@
-﻿using OpenHardwareMonitor.Hardware;
+﻿using HardwareInfo.HardwareBases;
+using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace HardwareInfo
 {
-    public class CPU : AHardware
+    public class CPU : BaseCPU<ISensor>, IHardwareable
     {
+        public IHardware Hardware { get; private set; }
+
         public Dictionary<int, Core> Cores { get; private set; }
 
-        public enum CPUAttribute
+        public CPU(IHardware cpu)
         {
-            PackageTemperature = 1,
-            PackagePower = 2,
-            TotalLoad = 3,
-            CoresPower = 4,
-            GraphicsPower = 5,
-            DRAMPower = 6,
-            BusClock = 7
-        }
-
-        public ISensor PackageTemperature { get; private set; }
-
-        public ISensor PackagePower { get; private set; }
-
-        public ISensor TotalLoad { get; private set; }
-
-        public ISensor CoresPower { get; private set; }
-
-        public ISensor GraphicsPower { get; private set; }
-
-        public ISensor DRAMPower { get; private set; }
-
-        public ISensor BusClock { get; private set; }
-
-        public override AHardwareType HardwareType { get => AHardwareType.CPU; }
-
-        public CPU(IHardware cpu) : base(cpu)
-        {
+            Hardware = cpu;
             Cores = new Dictionary<int, Core>();
             Initialize();
             foreach(PropertyInfo prop in this.GetType().GetProperties())
             {
                 if(prop.PropertyType == typeof(ISensor))
                 {
-                    prop.SetValue(this, Sensors.NAIfNull((ISensor)prop.GetValue(this)));
+                    prop.SetValue(this, SensorTool.NAIfNull((ISensor)prop.GetValue(this)));
                 }
             }
         }
 
-        internal override void Initialize()
+        public void Initialize()
         {
             foreach(ISensor sensor in Hardware.Sensors)
             {
@@ -132,6 +109,11 @@ namespace HardwareInfo
             }
         }
 
+        public void Update(IVisitor visitor)
+        {
+            Hardware.Accept(visitor);
+        }
+
         public ISensor GetCoreSensor(int coreIndex, SensorType sensorType)
         {
             if(Cores.ContainsKey(coreIndex))
@@ -142,14 +124,9 @@ namespace HardwareInfo
         }
     }
 
-    public class Core
+    public class Core : BaseCPUCore<ISensor>
     {
         public int Number { get; private set; }
-
-        public ISensor Temperature { get; private set; }
-
-        public ISensor Load { get; private set; }
-        public ISensor Clock { get; private set; }
 
         public Core(int number)
         {

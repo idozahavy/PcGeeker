@@ -1,47 +1,65 @@
-﻿using OpenHardwareMonitor.Hardware;
+﻿using HardwareInfo.HardwareBases;
+using OpenHardwareMonitor.Hardware;
 using System.Reflection;
 
 namespace HardwareInfo
 {
-    public class GPU : AHardware
+    public class GPU : BaseGPU<ISensor> , IHardwareable
     {
-        public GPUMemory Memory { get; private set; }
+        public IHardware Hardware { get; private set; }
 
-        public ISensor CoreTemperature { get; private set; }
-        public ISensor CoreClock { get; private set; }
-        public ISensor CoreLoad { get; private set; }
-        public ISensor ShaderClock { get; private set; }
-        public ISensor FrameBufferLoad { get; private set; }
-        public ISensor VideoEngineLoad { get; private set; }
-        public ISensor BusLoad { get; private set; }
-        public ISensor FanSpeed { get; private set; }
-
-        public override AHardwareType HardwareType { get => AHardwareType.GPU; }
-
-        public GPU(IHardware hardware) : base(hardware)
+        public GPU(IHardware hardware)
         {
+            Hardware = hardware;
             Initialize();
             foreach(PropertyInfo prop in this.GetType().GetProperties())
             {
                 if(prop.PropertyType == typeof(ISensor))
                 {
-                    prop.SetValue(this, Sensors.NAIfNull((ISensor)prop.GetValue(this)));
+                    prop.SetValue(this, SensorTool.NAIfNull((ISensor)prop.GetValue(this)));
                 }
             }
         }
 
-        internal override void Initialize()
+        public void Initialize()
         {
-            Memory = null;
             foreach(ISensor sensor in Hardware.Sensors)
             {
                 if(sensor.Name.Contains("Memory"))
                 {
-                    if(Memory == null)
+                    switch(sensor.SensorType)
                     {
-                        Memory = new GPUMemory();
+                        case SensorType.Clock:
+                        {
+                            MemoryClock = sensor;
+                        }
+                        break;
+
+                        case SensorType.Load:
+                        {
+                            MemoryLoad = sensor;
+                        }
+                        break;
+
+                        case SensorType.SmallData:
+                        {
+                            if(sensor.Name.EndsWith("Total"))
+                            { MemoryTotal = sensor; }
+                            else if(sensor.Name.EndsWith("Used"))
+                            { MemoryUsed = sensor; }
+                            else if(sensor.Name.EndsWith("Free"))
+                            { MemoryFree = sensor; }
+                            else
+                            { Jsoner.ObjectSaver.AddObject(sensor); }
+                        }
+                        break;
+
+                        default:
+                        {
+                            Jsoner.ObjectSaver.AddObject(sensor);
+                        }
+                        break;
                     }
-                    Memory.Initialize(sensor);
                 }
                 else // not a memory sensor
                 {
@@ -50,59 +68,61 @@ namespace HardwareInfo
                         case SensorType.Load:
                         {
                             if(sensor.Name.Contains("Core"))
-                            { CoreLoad = sensor; break; }
-                            if(sensor.Name.Contains("Frame Buffer"))
-                            { FrameBufferLoad = sensor; break; }
-                            if(sensor.Name.Contains("Video Engine"))
-                            { VideoEngineLoad = sensor; break; }
-                            if(sensor.Name.Contains("Bus Interface"))
-                            { BusLoad = sensor; break; }
-                            Jsoner.ObjectSaver.AddObject(sensor);
-                            break;
+                            { CoreLoad = sensor; }
+                            else if(sensor.Name.Contains("Frame Buffer"))
+                            { FrameBufferLoad = sensor; }
+                            else if(sensor.Name.Contains("Video Engine"))
+                            { VideoEngineLoad = sensor; }
+                            else if(sensor.Name.Contains("Bus Interface"))
+                            { BusLoad = sensor; }
+                            else
+                            { Jsoner.ObjectSaver.AddObject(sensor); }
                         }
+                        break;
+
                         case SensorType.Temperature:
                         {
                             if(sensor.Name.Contains("Core"))
-                            { CoreTemperature = sensor; break; }
-                            Jsoner.ObjectSaver.AddObject(sensor);
-                            break;
+                            { CoreTemperature = sensor; }
+                            else
+                            { Jsoner.ObjectSaver.AddObject(sensor); }
                         }
+                        break;
+
                         case SensorType.Clock:
                         {
                             if(sensor.Name.Contains("Shader"))
-                            { ShaderClock = sensor; break; }
-                            if(sensor.Name.Contains("Core"))
-                            { CoreClock = sensor; break; }
-                            Jsoner.ObjectSaver.AddObject(sensor);
-                            break;
+                            { ShaderClock = sensor; }
+                            else if(sensor.Name.Contains("Core"))
+                            { CoreClock = sensor; }
+                            else
+                            { Jsoner.ObjectSaver.AddObject(sensor); }
                         }
+                        break;
+
                         case SensorType.Control:
                         {
                             if(sensor.Name.Contains("Fan"))
                             { FanSpeed = sensor; break; }
                             Jsoner.ObjectSaver.AddObject(sensor);
-                            break;
                         }
+                        break;
+
                         default:
                         {
                             Jsoner.ObjectSaver.AddObject(sensor);
-                            break;
                         }
+                        break;
                     }
                 }
             }
         }
 
-        public enum GPUAttribute
+        public void Update(IVisitor visitor)
         {
-            CoreTemperature = 1,
-            CoreClock = 2,
-            CoreLoad = 3,
-            ShaderClock = 4,
-            FrameBufferLoad = 5,
-            VideoEngineLoad = 6,
-            BusLoad = 7,
-            FanSpeed = 8
+            Hardware.Accept(visitor);
         }
+
+        
     }
 }
