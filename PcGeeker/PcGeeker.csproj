@@ -65,6 +65,9 @@
     <Compile Include="HardwareInfo\Analyzer\DriveAnalyze\DriveAnalysis.cs" />
     <Compile Include="HardwareInfo\Analyzer\DriveAnalyze\DriveAnalyzer.cs" />
     <Compile Include="HardwareInfo\Analyzer\DriveAnalyze\DriveAnalyzerSettings.cs" />
+    <Compile Include="HardwareInfo\Analyzer\MotherboardAnalyze\MotherboardAnalyzer.cs" />
+    <Compile Include="HardwareInfo\Analyzer\MotherboardAnalyze\MotherboardAnalyzerSettings.cs" />
+    <Compile Include="HardwareInfo\Analyzer\MotherboardAnalyze\MotherboardAnalysis.cs" />
     <Compile Include="HardwareInfo\HardwareBases\BaseDrive.cs" />
     <Compile Include="HardwareInfo\HardwareBases\BaseGPU.cs" />
     <Compile Include="HardwareInfo\HardwareBases\BaseHardware.cs" />
@@ -100,8 +103,8 @@
     <Compile Include="HardwareInfo\Sensor\SensorTool.cs" />
     <Compile Include="HardwareInfo\PC.cs" />
     <Compile Include="HardwareInfo\RAM.cs" />
-    <Compile Include="HardwareInfo\VisitorUpdater.cs" />
-    <Compile Include="HardwareInfo\VisitSetting.cs" />
+    <Compile Include="HardwareInfo\Visitors\CascadingVisitor.cs" />
+    <Compile Include="HardwareInfo\PCSettings.cs" />
     <Compile Include="Jsoner\ObjectSaver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -132,7 +135,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="HardwareInfo\Analyzer\MotherboardAnalyze\" />
     <Folder Include="HardwareInfo\Analyzer\RAMAnalyze\" />
     <Folder Include="HardwareInfo\Logger\" />
   </ItemGroup>

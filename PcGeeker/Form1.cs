@@ -46,8 +46,10 @@ namespace PcGeeker
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            List<FieldThreshold> fields = new List<FieldThreshold>();
-            fields.Add(new FieldThreshold(Core.CPUCoreField.Load, 80));
+            List<FieldThreshold> fields = new List<FieldThreshold>
+            {
+                new FieldThreshold(Core.CPUCoreField.Load, 80)
+            };
             pc.Update();
             allTabListBox.Items.Clear();
             CPUAnalysis analysis = cpuAnalyzer.Analyze();

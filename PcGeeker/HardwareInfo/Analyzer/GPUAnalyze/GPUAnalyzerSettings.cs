@@ -165,7 +165,7 @@ namespace HardwareInfo.Analyzer.GPUAnalyze
             }
         }
 
-        public string FieldStringThreshold(BaseGPU<ISensor>.GPUField field, float thresholdValue)
+        public string FieldStringThreshold(GPU.GPUField field, float thresholdValue)
         {
             return FieldThreshold.FieldStringThreshold(field, thresholdValue);
         }

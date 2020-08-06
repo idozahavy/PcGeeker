@@ -8,7 +8,7 @@ namespace HardwareInfo
     {
         private Computer computer;
         private IVisitor visitor;
-        private ComputerVisitSetting visitSetting;
+        private PCSettings visitSetting;
 
         public CPU CPU { get; private set; }
         public GPU GPU { get; private set; }
@@ -20,16 +20,16 @@ namespace HardwareInfo
         {
             if(visitAll)
             {
-                this.visitSetting = new ComputerVisitSetting(true, true, true, true, true, true);
+                this.visitSetting = new PCSettings(true, true, true, true, true, true);
             }
             else
             {
-                this.visitSetting = new ComputerVisitSetting("");
+                this.visitSetting = new PCSettings("");
             }
             Initialize();
         }
 
-        public PC(ComputerVisitSetting setting)
+        public PC(PCSettings setting)
         {
             this.visitSetting = setting;
             Initialize();
@@ -38,7 +38,7 @@ namespace HardwareInfo
         public void Initialize()
         {
             this.Drives = new List<Drive>();
-            visitor = new VisitorUpdater();
+            visitor = new CascadingVisitor();
             computer = new Computer();
             visitSetting.SetComputerSettings(computer);
             computer.Open();

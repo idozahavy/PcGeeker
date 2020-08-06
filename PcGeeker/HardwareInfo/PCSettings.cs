@@ -2,7 +2,7 @@
 
 namespace HardwareInfo
 {
-    public class ComputerVisitSetting
+    public class PCSettings
     {
         public bool CPU { get; private set; }
         public bool GPU { get; private set; }
@@ -11,7 +11,7 @@ namespace HardwareInfo
         public bool HDD { get; private set; }
         public bool FAN { get; private set; }
 
-        public ComputerVisitSetting(bool cpu, bool gpu, bool ram, bool motherboard, bool hdd, bool fan)
+        public PCSettings(bool cpu, bool gpu, bool ram, bool motherboard, bool hdd, bool fan)
         {
             this.CPU = cpu;
             this.GPU = gpu;
@@ -25,7 +25,7 @@ namespace HardwareInfo
         ///
         /// </summary>
         /// <param name="args"></param>
-        public ComputerVisitSetting(params string[] args)
+        public PCSettings(params string[] args)
         {
             SetSettings(args);
         }

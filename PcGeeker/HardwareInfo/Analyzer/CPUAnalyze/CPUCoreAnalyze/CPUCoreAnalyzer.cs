@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HardwareInfo.Analyzer.CPUAnalyze.CPUCoreAnalyze
 {
-    public class CPUCoreAnalyzer : BaseCPUCore<SensoredThresholdProperty>
+    public class CPUCoreAnalyzer : BaseCPUCore<SensoredThresholdProperty>, IAnalyzer<CPUCoreAnalysis>
     {
         private CPUCoreAnalyzerSettings settings;
 

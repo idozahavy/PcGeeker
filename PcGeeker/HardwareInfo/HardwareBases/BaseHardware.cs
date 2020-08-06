@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HardwareInfo.HardwareBases
 {
-    public class BaseHardware
+    public abstract class BaseHardware
     {
         public delegate void WhereTypeFunc<T>(object sender, PropertyInfo property, T value);
         public void Where<T>(WhereTypeFunc<T> func)

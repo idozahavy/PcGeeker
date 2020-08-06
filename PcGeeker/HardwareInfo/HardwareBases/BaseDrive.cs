@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HardwareInfo.HardwareBases
 {
-    public class BaseDrive<T> : BaseHardware
+    public abstract class BaseDrive<T> : BaseHardware
     {
         public enum DriveField
         {

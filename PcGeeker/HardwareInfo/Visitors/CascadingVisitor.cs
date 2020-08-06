@@ -2,7 +2,7 @@
 
 namespace HardwareInfo
 {
-    internal class VisitorUpdater : IVisitor
+    public class CascadingVisitor : IVisitor
     {
         public void VisitComputer(IComputer computer)
         {

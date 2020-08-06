@@ -3,7 +3,7 @@ using HardwareInfo.HardwareBases;
 
 namespace HardwareInfo.Analyzer.CPUAnalyze.CPUCoreAnalyze
 {
-    public class CPUCoreAnalysis : BaseCPUCore<bool>
+    public class CPUCoreAnalysis : BaseCPUCore<bool>, IAnalysis
     {
         internal CPUCoreAnalysis()
         {

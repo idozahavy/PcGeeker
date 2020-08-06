@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HardwareInfo
 {
-    internal class SensorTool
+    public class SensorTool
     {
         public static ISensor NAIfNull(ISensor sensor)
         {
