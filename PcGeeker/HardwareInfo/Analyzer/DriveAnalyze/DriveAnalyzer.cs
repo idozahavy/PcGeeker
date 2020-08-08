@@ -1,4 +1,5 @@
-﻿using HardwareInfo.HardwareBases;
+﻿using HardwareInfo.Analyzer.Threshold;
+using HardwareInfo.HardwareBases;
 using System;
 using System.Collections.Generic;
 using System.Linq;

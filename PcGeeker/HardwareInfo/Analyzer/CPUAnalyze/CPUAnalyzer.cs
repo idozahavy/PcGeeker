@@ -1,4 +1,5 @@
 ﻿using HardwareInfo.Analyzer.CPUAnalyze.CPUCoreAnalyze;
+using HardwareInfo.Analyzer.Threshold;
 using HardwareInfo.HardwareBases;
 using System.Collections.Generic;
 
@@ -44,10 +45,11 @@ namespace HardwareInfo.Analyzer.CPUAnalyze
                 TotalLoad = TotalLoad.IsSensorThresholded()
             };
         }
+
         private List<CPUCoreAnalysis> GetCoresAnalysis()
         {
             List<CPUCoreAnalysis> ls = new List<CPUCoreAnalysis>();
-            foreach (CPUCoreAnalyzer analyzer in CoreAnalyzers)
+            foreach(CPUCoreAnalyzer analyzer in CoreAnalyzers)
             {
                 ls.Add(analyzer.Analyze());
             }

@@ -1,15 +1,12 @@
-﻿using HardwareInfo.HardwareBases;
-using System;
+﻿using HardwareInfo.Analyzer.Threshold;
+using HardwareInfo.HardwareBases;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HardwareInfo.Analyzer.CPUAnalyze.CPUCoreAnalyze
 {
     public class CPUCoreAnalyzerSettings : BaseCPUCore<SensorlessThresholdProperty>, IAnalyzerSettings<Core, Core.CPUCoreField>
     {
-
         public CPUCoreAnalyzerSettings(float? temperetureThreshold, float? loadThreshold, float? clockThreshold)
         {
             Temperature = new SensorlessThresholdProperty(temperetureThreshold);
@@ -50,7 +47,7 @@ namespace HardwareInfo.Analyzer.CPUAnalyze.CPUCoreAnalyze
             }
         }
 
-        public CPUCoreAnalyzerSettings(IEnumerable<FieldThreshold> args) : this (args.ToArray())
+        public CPUCoreAnalyzerSettings(IEnumerable<FieldThreshold> args) : this(args.ToArray())
         {
         }
 

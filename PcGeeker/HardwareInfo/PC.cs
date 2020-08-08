@@ -1,20 +1,21 @@
-﻿using OpenHardwareMonitor.Hardware;
+﻿using HardwareInfo.HardwareBases;
+using OpenHardwareMonitor.Hardware;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace HardwareInfo
 {
-    public class PC
+    public class PC : BasePC<IHardwareable>
     {
         private Computer computer;
         private IVisitor visitor;
         private PCSettings visitSetting;
 
-        public CPU CPU { get; private set; }
-        public GPU GPU { get; private set; }
-        public RAM RAM { get; private set; }
-        public List<Drive> Drives { get; private set; }
-        public Motherboard Motherboard { get; private set; }
+        public new CPU CPU { get; private set; }
+        public new GPU GPU { get; private set; }
+        public new RAM RAM { get; private set; }
+        public new List<Drive> Drive { get; private set; }
+        public new Motherboard Motherboard { get; private set; }
 
         public PC(bool visitAll)
         {
@@ -37,7 +38,7 @@ namespace HardwareInfo
 
         public void Initialize()
         {
-            this.Drives = new List<Drive>();
+            this.Drive = new List<Drive>();
             visitor = new CascadingVisitor();
             computer = new Computer();
             visitSetting.SetComputerSettings(computer);
@@ -62,7 +63,7 @@ namespace HardwareInfo
                         break;
 
                     case HardwareType.HDD:
-                        this.Drives.Add(new Drive(hard));
+                        this.Drive.Add(new Drive(hard));
                         break;
 
                     case HardwareType.Mainboard:

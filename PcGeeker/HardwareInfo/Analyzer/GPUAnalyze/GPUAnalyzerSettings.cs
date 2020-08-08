@@ -1,4 +1,5 @@
-﻿using HardwareInfo.HardwareBases;
+﻿using HardwareInfo.Analyzer.Threshold;
+using HardwareInfo.HardwareBases;
 using OpenHardwareMonitor.Hardware;
 
 namespace HardwareInfo.Analyzer.GPUAnalyze

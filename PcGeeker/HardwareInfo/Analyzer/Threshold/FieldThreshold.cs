@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HardwareInfo.Analyzer
+namespace HardwareInfo.Analyzer.Threshold
 {
     public class FieldThreshold
     {

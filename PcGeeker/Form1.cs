@@ -2,6 +2,8 @@
 using HardwareInfo.Analyzer;
 using HardwareInfo.Analyzer.CPUAnalyze;
 using HardwareInfo.Analyzer.CPUAnalyze.CPUCoreAnalyze;
+using HardwareInfo.Analyzer.Threshold;
+using HardwareInfo.HardwareBases;
 using OpenHardwareMonitor.Collections;
 using OpenHardwareMonitor.Hardware;
 using ProcessInfo;
@@ -42,6 +44,12 @@ namespace PcGeeker
 
             ProcessUtilitationCollection utils = new ProcessUtilitationCollection();
             utils.UpdateProcesses();
+
+            PCAnalyzerSettings settings = new PCAnalyzerSettings();
+            settings.CPU = new CPUAnalyzerSettings(new CPUCoreAnalyzerSettings(""),
+                new FieldThreshold(CPU.CPUField.CoresPower, 20));
+            new PCAnalyzer(pc, "", new PCAnalyzerSettings());
+
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
@@ -53,9 +61,9 @@ namespace PcGeeker
             pc.Update();
             allTabListBox.Items.Clear();
             CPUAnalysis analysis = cpuAnalyzer.Analyze();
-            analysis.Where<bool>(new WhereTypeFunc<bool>(www));
-
+            analysis.Where<bool>(www);
         }
+
         private void www(object self, PropertyInfo prop, bool value)
         {
             if(value)

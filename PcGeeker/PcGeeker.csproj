@@ -68,14 +68,19 @@
     <Compile Include="HardwareInfo\Analyzer\MotherboardAnalyze\MotherboardAnalyzer.cs" />
     <Compile Include="HardwareInfo\Analyzer\MotherboardAnalyze\MotherboardAnalyzerSettings.cs" />
     <Compile Include="HardwareInfo\Analyzer\MotherboardAnalyze\MotherboardAnalysis.cs" />
+    <Compile Include="HardwareInfo\Analyzer\PCAnalysis.cs" />
+    <Compile Include="HardwareInfo\Analyzer\RAMAnalyze\RAMAnalysis.cs" />
+    <Compile Include="HardwareInfo\Analyzer\RAMAnalyze\RAMAnalyzer.cs" />
+    <Compile Include="HardwareInfo\Analyzer\RAMAnalyze\RAMAnalyzerSettings.cs" />
     <Compile Include="HardwareInfo\HardwareBases\BaseDrive.cs" />
     <Compile Include="HardwareInfo\HardwareBases\BaseGPU.cs" />
     <Compile Include="HardwareInfo\HardwareBases\BaseHardware.cs" />
     <Compile Include="HardwareInfo\HardwareBases\BaseMotherboard.cs" />
+    <Compile Include="HardwareInfo\HardwareBases\BasePC.cs" />
     <Compile Include="HardwareInfo\HardwareBases\BaseRAM.cs" />
     <Compile Include="HardwareInfo\HardwareBases\IHardwareable.cs" />
     <Compile Include="HardwareInfo\HardwareTool.cs" />
-    <Compile Include="HardwareInfo\Analyzer\FieldThreshold.cs" />
+    <Compile Include="HardwareInfo\Analyzer\Threshold\FieldThreshold.cs" />
     <Compile Include="HardwareInfo\Analyzer\CPUAnalyze\CPUAnalysis.cs" />
     <Compile Include="HardwareInfo\Analyzer\CPUAnalyze\CPUCoreAnalyze\CPUCoreAnalysis.cs" />
     <Compile Include="HardwareInfo\HardwareBases\BaseCPU.cs" />
@@ -89,7 +94,7 @@
     <Compile Include="HardwareInfo\Analyzer\IAnalysis.cs" />
     <Compile Include="HardwareInfo\Analyzer\IAnalyzer.cs" />
     <Compile Include="HardwareInfo\Analyzer\IAnalyzerSettings.cs" />
-    <Compile Include="HardwareInfo\Analyzer\SensorlessThresholdProperty.cs" />
+    <Compile Include="HardwareInfo\Analyzer\Threshold\SensorlessThresholdProperty.cs" />
     <Compile Include="HardwareInfo\CPU.cs" />
     <Compile Include="HardwareInfo\Drive.cs" />
     <Compile Include="HardwareInfo\GPU.cs" />
@@ -97,7 +102,7 @@
     <Compile Include="HardwareInfo\Analyzer\CPUAnalyze\CPUAnalyzer.cs" />
     <Compile Include="HardwareInfo\Analyzer\PCAnalyzer.cs" />
     <Compile Include="HardwareInfo\Analyzer\PCAnalyzerSettings.cs" />
-    <Compile Include="HardwareInfo\Analyzer\SensoredThresholdProperty.cs" />
+    <Compile Include="HardwareInfo\Analyzer\Threshold\SensoredThresholdProperty.cs" />
     <Compile Include="HardwareInfo\Sensor\UpdateSensor.cs" />
     <Compile Include="ProcessInfo\ProcessUtilitation.cs" />
     <Compile Include="HardwareInfo\Sensor\SensorTool.cs" />
@@ -135,7 +140,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="HardwareInfo\Analyzer\RAMAnalyze\" />
     <Folder Include="HardwareInfo\Logger\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

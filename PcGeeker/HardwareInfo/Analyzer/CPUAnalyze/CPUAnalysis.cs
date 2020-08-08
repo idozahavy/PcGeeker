@@ -1,7 +1,6 @@
 ﻿using HardwareInfo.Analyzer.CPUAnalyze.CPUCoreAnalyze;
 using HardwareInfo.HardwareBases;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace HardwareInfo.Analyzer.CPUAnalyze
 {

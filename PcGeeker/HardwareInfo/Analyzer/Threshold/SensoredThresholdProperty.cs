@@ -1,6 +1,6 @@
 ﻿using OpenHardwareMonitor.Hardware;
 
-namespace HardwareInfo.Analyzer
+namespace HardwareInfo.Analyzer.Threshold
 {
     public class SensoredThresholdProperty : SensorlessThresholdProperty
     {

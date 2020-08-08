@@ -18,6 +18,14 @@ namespace HardwareInfo.HardwareBases
                 {
                     func.Invoke(this, prop, (T)prop.GetValue(this));
                 }
+                else if(prop.PropertyType == typeof(List<T>))
+                {
+                    List<T> ls = prop.GetValue(this) as List<T>;
+                    foreach(T obj in ls)
+                    {
+                        func.Invoke(this, prop, obj);
+                    }
+                }
             }
         }
     }

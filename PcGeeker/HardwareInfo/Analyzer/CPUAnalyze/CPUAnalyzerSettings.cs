@@ -1,6 +1,6 @@
 ﻿using HardwareInfo.Analyzer.CPUAnalyze.CPUCoreAnalyze;
+using HardwareInfo.Analyzer.Threshold;
 using HardwareInfo.HardwareBases;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,7 +33,7 @@ namespace HardwareInfo.Analyzer.CPUAnalyze
         /// Gets the args and construct the Thresholds for every arg
         /// </summary>
         /// <param name="args">Format for every string is 'cpuFieldName:thresholdValue'</param>
-        public CPUAnalyzerSettings(CPUCoreAnalyzerSettings coreAnalyzerSettings, params string[] args) : this (coreAnalyzerSettings)
+        public CPUAnalyzerSettings(CPUCoreAnalyzerSettings coreAnalyzerSettings, params string[] args) : this(coreAnalyzerSettings)
         {
             foreach(string arg in args)
             {
@@ -86,9 +86,8 @@ namespace HardwareInfo.Analyzer.CPUAnalyze
             }
         }
 
-        public CPUAnalyzerSettings(CPUCoreAnalyzerSettings coreAnalyzerSettings, IEnumerable<FieldThreshold> args): this(coreAnalyzerSettings, args.ToArray())
+        public CPUAnalyzerSettings(CPUCoreAnalyzerSettings coreAnalyzerSettings, IEnumerable<FieldThreshold> args) : this(coreAnalyzerSettings, args.ToArray())
         {
-
         }
 
         public CPUAnalyzerSettings(CPUCoreAnalyzerSettings coreAnalyzerSettings, params FieldThreshold[] args) : this(coreAnalyzerSettings)
@@ -100,27 +99,34 @@ namespace HardwareInfo.Analyzer.CPUAnalyze
                     case CPU.CPUField.BusClock:
                         BusClock = new SensorlessThresholdProperty(arg.ThresholdValue);
                         break;
+
                     case CPU.CPUField.CoresPower:
                         CoresPower = new SensorlessThresholdProperty(arg.ThresholdValue);
                         break;
+
                     case CPU.CPUField.DRAMPower:
                         DRAMPower = new SensorlessThresholdProperty(arg.ThresholdValue);
                         break;
+
                     case CPU.CPUField.GraphicsPower:
                         GraphicsPower = new SensorlessThresholdProperty(arg.ThresholdValue);
                         break;
+
                     case CPU.CPUField.PackagePower:
                         PackagePower = new SensorlessThresholdProperty(arg.ThresholdValue);
                         break;
+
                     case CPU.CPUField.PackageTemperature:
                         PackageTemperature = new SensorlessThresholdProperty(arg.ThresholdValue);
                         break;
+
                     case CPU.CPUField.TotalLoad:
                         TotalLoad = new SensorlessThresholdProperty(arg.ThresholdValue);
                         break;
                 }
             }
         }
+
         public string FieldStringThreshold(CPU.CPUField field, float thresholdValue)
         {
             return FieldThreshold.FieldStringThreshold(field, thresholdValue);

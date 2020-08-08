@@ -1,5 +1,4 @@
-﻿
-using HardwareInfo.HardwareBases;
+﻿using HardwareInfo.HardwareBases;
 
 namespace HardwareInfo.Analyzer.CPUAnalyze.CPUCoreAnalyze
 {
@@ -8,7 +7,7 @@ namespace HardwareInfo.Analyzer.CPUAnalyze.CPUCoreAnalyze
         internal CPUCoreAnalysis()
         {
         }
-        
+
         public CPUCoreAnalysis(bool temperatureThresholded, bool loadThresholded, bool clockThresholded)
         {
             Temperature = temperatureThresholded;

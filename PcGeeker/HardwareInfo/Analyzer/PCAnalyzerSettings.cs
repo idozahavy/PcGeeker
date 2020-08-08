@@ -1,23 +1,24 @@
 ﻿using HardwareInfo.Analyzer.CPUAnalyze;
+using HardwareInfo.Analyzer.Threshold;
+using HardwareInfo.HardwareBases;
+using System;
+using System.Collections.Generic;
 
 namespace HardwareInfo.Analyzer
 {
-    public class PCAnalyzerSettings
+    public class PCAnalyzerSettings : IAnalyzerSettings<PC, PC.PCField>
     {
-        public bool CPU { get; private set; }
-        public bool GPU { get; private set; }
-        public bool RAM { get; private set; }
-        public bool Drive { get; private set; }
-        public bool Motherboard { get; private set; }
-        public CPUAnalyzerSettings CPUSettings { get; private set; }
 
-        public PCAnalyzerSettings(bool cpu, bool gpu, bool ram, bool drive, bool motherboard)
+        public CPUAnalyzerSettings CPU;
+
+        internal PCAnalyzerSettings()
         {
-            CPU = cpu;
-            GPU = gpu;
-            RAM = ram;
-            Drive = drive;
-            Motherboard = motherboard;
+
+        }
+
+        public string FieldStringThreshold(BasePC<IHardwareable>.PCField field, float thresholdValue)
+        {
+            return FieldThreshold.FieldStringThreshold(field, thresholdValue);
         }
     }
 }
