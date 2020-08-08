@@ -1,8 +1,7 @@
 ﻿using HardwareInfo.Analyzer.Threshold;
-using HardwareInfo.HardwareBases;
+using HardwareInfo.HardwareClass;
 using OpenHardwareMonitor.Hardware;
 using System.Collections.Generic;
-using System.Windows.Forms.VisualStyles;
 
 namespace HardwareInfo.Analyzer.MotherboardAnalyze
 {

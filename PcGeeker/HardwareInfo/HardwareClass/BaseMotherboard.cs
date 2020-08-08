@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace HardwareInfo.HardwareBases
+namespace HardwareInfo.HardwareClass
 {
     public abstract class BaseMotherboard<T> : BaseHardware
-    { 
+    {
         public enum MotherboardField
         {
             FanControls = 1,

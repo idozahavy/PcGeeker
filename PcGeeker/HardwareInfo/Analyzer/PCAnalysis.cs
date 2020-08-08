@@ -1,14 +1,8 @@
 ﻿using HardwareInfo.Analyzer.CPUAnalyze;
-using HardwareInfo.Analyzer.DriveAnalyze;
 using HardwareInfo.Analyzer.GPUAnalyze;
 using HardwareInfo.Analyzer.MotherboardAnalyze;
-using HardwareInfo.Analyzer.RAMAnalyze;
-using HardwareInfo.HardwareBases;
-using System;
+using HardwareInfo.HardwareClass;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HardwareInfo.Analyzer
 {
@@ -16,7 +10,6 @@ namespace HardwareInfo.Analyzer
     {
         internal PCAnalysis()
         {
-
         }
 
         public PCAnalysis(CPUAnalysis cpuAnalysis, GPUAnalysis gpuAnalysis,

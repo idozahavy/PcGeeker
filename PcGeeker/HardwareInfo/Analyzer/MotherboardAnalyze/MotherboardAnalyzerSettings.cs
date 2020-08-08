@@ -1,6 +1,5 @@
 ﻿using HardwareInfo.Analyzer.Threshold;
-using HardwareInfo.HardwareBases;
-using OpenHardwareMonitor.Hardware;
+using HardwareInfo.HardwareClass;
 using System.Collections.Generic;
 
 namespace HardwareInfo.Analyzer.MotherboardAnalyze
@@ -56,6 +55,7 @@ namespace HardwareInfo.Analyzer.MotherboardAnalyze
                     case "cpufanspeed":
                         CpuFanSpeed = new SensorlessThresholdProperty(float.Parse(segments[1]));
                         break;
+
                     case "fancontrols":
                         FanControls = new List<SensorlessThresholdProperty>
                         {

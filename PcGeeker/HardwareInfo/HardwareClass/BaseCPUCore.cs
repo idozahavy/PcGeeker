@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HardwareInfo.HardwareBases
+﻿namespace HardwareInfo.HardwareClass
 {
     public abstract class BaseCPUCore<T> : BaseHardware
     {

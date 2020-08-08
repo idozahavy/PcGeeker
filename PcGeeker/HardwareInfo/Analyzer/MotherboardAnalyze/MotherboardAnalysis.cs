@@ -1,9 +1,9 @@
-﻿using HardwareInfo.HardwareBases;
+﻿using HardwareInfo.HardwareClass;
 using System.Collections.Generic;
 
 namespace HardwareInfo.Analyzer.MotherboardAnalyze
 {
-    public class MotherboardAnalysis :BaseMotherboard<bool>, IAnalysis
+    public class MotherboardAnalysis : BaseMotherboard<bool>, IAnalysis
     {
         internal MotherboardAnalysis()
         {

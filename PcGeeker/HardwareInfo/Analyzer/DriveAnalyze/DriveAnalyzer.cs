@@ -1,16 +1,12 @@
 ﻿using HardwareInfo.Analyzer.Threshold;
-using HardwareInfo.HardwareBases;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HardwareInfo.HardwareClass;
 
 namespace HardwareInfo.Analyzer.DriveAnalyze
 {
     public class DriveAnalyzer : BaseDrive<SensoredThresholdProperty>, IAnalyzer<DriveAnalysis>
     {
         private DriveAnalyzerSettings settings;
+
         public DriveAnalyzer(Drive drive, DriveAnalyzerSettings settings)
         {
             this.settings = settings;

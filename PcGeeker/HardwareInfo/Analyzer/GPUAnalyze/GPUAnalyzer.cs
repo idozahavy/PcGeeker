@@ -1,5 +1,5 @@
 ﻿using HardwareInfo.Analyzer.Threshold;
-using HardwareInfo.HardwareBases;
+using HardwareInfo.HardwareClass;
 
 namespace HardwareInfo.Analyzer.GPUAnalyze
 {
@@ -24,14 +24,14 @@ namespace HardwareInfo.Analyzer.GPUAnalyze
         {
             return new GPUAnalysis()
             {
-                BusLoad= BusLoad.IsSensorThresholded(),
-                CoreClock= CoreClock.IsSensorThresholded(),
-                CoreLoad= CoreLoad.IsSensorThresholded(),
-                CoreTemperature= CoreTemperature.IsSensorThresholded(),
-                FanSpeed= FanSpeed.IsSensorThresholded(),
-                FrameBufferLoad= FrameBufferLoad.IsSensorThresholded(),
-                ShaderClock= ShaderClock.IsSensorThresholded(),
-                VideoEngineLoad= VideoEngineLoad.IsSensorThresholded()
+                BusLoad = BusLoad.IsSensorThresholded(),
+                CoreClock = CoreClock.IsSensorThresholded(),
+                CoreLoad = CoreLoad.IsSensorThresholded(),
+                CoreTemperature = CoreTemperature.IsSensorThresholded(),
+                FanSpeed = FanSpeed.IsSensorThresholded(),
+                FrameBufferLoad = FrameBufferLoad.IsSensorThresholded(),
+                ShaderClock = ShaderClock.IsSensorThresholded(),
+                VideoEngineLoad = VideoEngineLoad.IsSensorThresholded()
             };
         }
     }

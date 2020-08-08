@@ -1,10 +1,6 @@
 ﻿using OpenHardwareMonitor.Collections;
 using OpenHardwareMonitor.Hardware;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HardwareInfo.Sensor
 {
@@ -35,7 +31,9 @@ namespace HardwareInfo.Sensor
         public IControl Control { get; set; }
 
         public delegate void UpdateDelegate(UpdateSensor self);
+
         private UpdateDelegate Update;
+
         public void InvokeUpdate()
         {
             Update.Invoke(this);

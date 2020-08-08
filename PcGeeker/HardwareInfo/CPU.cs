@@ -1,4 +1,5 @@
-﻿using HardwareInfo.HardwareBases;
+﻿using HardwareInfo.HardwareClass;
+using HardwareInfo.Sensor;
 using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;

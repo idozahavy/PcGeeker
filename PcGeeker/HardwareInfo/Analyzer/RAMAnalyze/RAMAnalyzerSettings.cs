@@ -1,6 +1,5 @@
 ﻿using HardwareInfo.Analyzer.Threshold;
-using HardwareInfo.HardwareBases;
-using OpenHardwareMonitor.Hardware;
+using HardwareInfo.HardwareClass;
 
 namespace HardwareInfo.Analyzer.RAMAnalyze
 {

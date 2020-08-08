@@ -3,7 +3,7 @@ using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;
 
-namespace HardwareInfo
+namespace HardwareInfo.Sensor
 {
     public class SensorTool
     {

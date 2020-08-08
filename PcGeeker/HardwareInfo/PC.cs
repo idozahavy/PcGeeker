@@ -1,4 +1,4 @@
-﻿using HardwareInfo.HardwareBases;
+﻿using HardwareInfo.HardwareClass;
 using OpenHardwareMonitor.Hardware;
 using System.Collections.Generic;
 using System.Windows.Forms;

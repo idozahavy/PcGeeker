@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HardwareInfo.HardwareBases
+namespace HardwareInfo.HardwareClass
 {
     public abstract class BaseHardware
     {
         public delegate void WhereTypeFunc<T>(object sender, PropertyInfo property, T value);
+
         public void Where<T>(WhereTypeFunc<T> func)
         {
             foreach(PropertyInfo prop in this.GetType().GetProperties())
@@ -29,5 +26,4 @@ namespace HardwareInfo.HardwareBases
             }
         }
     }
-    
 }

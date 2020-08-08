@@ -1,5 +1,5 @@
 ﻿using HardwareInfo.Analyzer.Threshold;
-using HardwareInfo.HardwareBases;
+using HardwareInfo.HardwareClass;
 
 namespace HardwareInfo.Analyzer.CPUAnalyze.CPUCoreAnalyze
 {

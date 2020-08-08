@@ -1,5 +1,4 @@
 ﻿using HardwareInfo.Analyzer.CPUAnalyze;
-using HardwareInfo.HardwareBases;
 
 namespace HardwareInfo.Analyzer
 {

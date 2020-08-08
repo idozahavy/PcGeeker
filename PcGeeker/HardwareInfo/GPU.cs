@@ -1,10 +1,11 @@
-﻿using HardwareInfo.HardwareBases;
+﻿using HardwareInfo.HardwareClass;
+using HardwareInfo.Sensor;
 using OpenHardwareMonitor.Hardware;
 using System.Reflection;
 
 namespace HardwareInfo
 {
-    public class GPU : BaseGPU<ISensor> , IHardwareable
+    public class GPU : BaseGPU<ISensor>, IHardwareable
     {
         public IHardware Hardware { get; private set; }
 
@@ -122,7 +123,5 @@ namespace HardwareInfo
         {
             Hardware.Accept(visitor);
         }
-
-        
     }
 }

@@ -1,4 +1,4 @@
-﻿using HardwareInfo.HardwareBases;
+﻿using HardwareInfo.HardwareClass;
 using HardwareInfo.Sensor;
 using OpenHardwareMonitor.Hardware;
 using System.Reflection;
@@ -25,7 +25,7 @@ namespace HardwareInfo
         public void Update(IVisitor visitor)
         {
             Hardware.Accept(visitor);
-            if (Total is UpdateSensor total)
+            if(Total is UpdateSensor total)
             {
                 total.InvokeUpdate();
             }
@@ -57,7 +57,7 @@ namespace HardwareInfo
                             Jsoner.ObjectSaver.AddObject(sensor);
                         }
                     }
-                        break;
+                    break;
 
                     default:
                         Jsoner.ObjectSaver.AddObject(sensor);
@@ -68,7 +68,7 @@ namespace HardwareInfo
 
         private void ValueSensorUpdate(UpdateSensor self)
         {
-            if (Used != null && Available !=null)
+            if(Used != null && Available != null)
             {
                 self.SensorType = SensorType.Data;
                 self.Value = Used.Value + Available.Value;
@@ -79,7 +79,5 @@ namespace HardwareInfo
                 self.IsDefaultHidden = true;
             }
         }
-
-        
     }
 }

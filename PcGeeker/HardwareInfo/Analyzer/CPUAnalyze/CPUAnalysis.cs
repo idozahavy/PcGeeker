@@ -1,5 +1,5 @@
 ﻿using HardwareInfo.Analyzer.CPUAnalyze.CPUCoreAnalyze;
-using HardwareInfo.HardwareBases;
+using HardwareInfo.HardwareClass;
 using System.Collections.Generic;
 
 namespace HardwareInfo.Analyzer.CPUAnalyze

@@ -1,11 +1,8 @@
 ﻿using HardwareInfo.Analyzer.Threshold;
-using HardwareInfo.HardwareBases;
+using HardwareInfo.HardwareClass;
 using OpenHardwareMonitor.Hardware;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HardwareInfo.Analyzer.DriveAnalyze
 {
@@ -45,9 +42,10 @@ namespace HardwareInfo.Analyzer.DriveAnalyze
             }
         }
 
-        public DriveAnalyzerSettings(IEnumerable<FieldThreshold> args): this(args.ToArray())
+        public DriveAnalyzerSettings(IEnumerable<FieldThreshold> args) : this(args.ToArray())
         {
         }
+
         public DriveAnalyzerSettings(params FieldThreshold[] args)
         {
             foreach(FieldThreshold arg in args)

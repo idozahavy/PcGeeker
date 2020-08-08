@@ -1,8 +1,8 @@
-﻿using HardwareInfo.HardwareBases;
+﻿using HardwareInfo.HardwareClass;
 
 namespace HardwareInfo.Analyzer.GPUAnalyze
 {
-    public class GPUAnalysis :BaseGPU<bool>, IAnalysis
+    public class GPUAnalysis : BaseGPU<bool>, IAnalysis
     {
         internal GPUAnalysis()
         {

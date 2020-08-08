@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace HardwareInfo.HardwareBases
+namespace HardwareInfo.HardwareClass
 {
     public class BasePC<T> : BaseHardware
     {
-
         public enum PCField
         {
             CPU = 1,

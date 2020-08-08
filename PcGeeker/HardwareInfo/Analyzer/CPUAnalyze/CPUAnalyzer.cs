@@ -1,6 +1,6 @@
 ﻿using HardwareInfo.Analyzer.CPUAnalyze.CPUCoreAnalyze;
 using HardwareInfo.Analyzer.Threshold;
-using HardwareInfo.HardwareBases;
+using HardwareInfo.HardwareClass;
 using System.Collections.Generic;
 
 namespace HardwareInfo.Analyzer.CPUAnalyze

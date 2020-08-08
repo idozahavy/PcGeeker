@@ -3,7 +3,7 @@ using HardwareInfo.Analyzer;
 using HardwareInfo.Analyzer.CPUAnalyze;
 using HardwareInfo.Analyzer.CPUAnalyze.CPUCoreAnalyze;
 using HardwareInfo.Analyzer.Threshold;
-using HardwareInfo.HardwareBases;
+using HardwareInfo.HardwareClass;
 using OpenHardwareMonitor.Collections;
 using OpenHardwareMonitor.Hardware;
 using ProcessInfo;
@@ -17,7 +17,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using static HardwareInfo.HardwareBases.BaseHardware;
+using static HardwareInfo.HardwareClass.BaseHardware;
 
 namespace PcGeeker
 {
