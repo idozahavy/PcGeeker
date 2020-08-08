@@ -1,8 +1,8 @@
 ﻿using HardwareInfo;
-using HardwareInfo.Analyzer;
-using HardwareInfo.Analyzer.CPUAnalyze;
-using HardwareInfo.Analyzer.CPUAnalyze.CPUCoreAnalyze;
-using HardwareInfo.Analyzer.Threshold;
+using HardwareInfo.Analyze;
+using HardwareInfo.Analyze.CPUAnalyze;
+using HardwareInfo.Analyze.CPUAnalyze.CPUCoreAnalyze;
+using HardwareInfo.Analyze.Threshold;
 using HardwareInfo.HardwareClass;
 using OpenHardwareMonitor.Collections;
 using OpenHardwareMonitor.Hardware;
@@ -25,6 +25,7 @@ namespace PcGeeker
     {
         private PC pc;
         private CPUAnalyzer cpuAnalyzer;
+        ProcessUtilizationCollection utils;
 
         public Form1()
         {
@@ -39,17 +40,9 @@ namespace PcGeeker
                 new FieldThreshold(CPU.CPUField.TotalLoad, 70)
                 )
             );
-            Timer1.Start();
-
-
-            ProcessUtilitationCollection utils = new ProcessUtilitationCollection();
+            utils = new ProcessUtilizationCollection();
             utils.UpdateProcesses();
-
-            PCAnalyzerSettings settings = new PCAnalyzerSettings();
-            settings.CPU = new CPUAnalyzerSettings(new CPUCoreAnalyzerSettings(""),
-                new FieldThreshold(CPU.CPUField.CoresPower, 20));
-            new PCAnalyzer(pc, "", new PCAnalyzerSettings());
-
+            Timer1.Start();
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
@@ -62,6 +55,7 @@ namespace PcGeeker
             allTabListBox.Items.Clear();
             CPUAnalysis analysis = cpuAnalyzer.Analyze();
             analysis.Where<bool>(www);
+            label1.Text = utils.UpdateGetTotalUtilization().ToString();
         }
 
         private void www(object self, PropertyInfo prop, bool value)

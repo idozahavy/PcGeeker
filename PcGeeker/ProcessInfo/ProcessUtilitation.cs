@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ProcessInfo
 {
-    public class ProcessUtilitationCollection
+    public class ProcessUtilizationCollection
     {
-        public HashSet<ProcessUtilization> ProcessUtilizations;
+        public HashSet<ProcessUtilization> ProcessUtilizations = null;
 
-        public ProcessUtilitationCollection()
+        public ProcessUtilizationCollection()
         {
             ProcessUtilizations = new HashSet<ProcessUtilization>(new ProcessUtilization.ProcessUtilizationEqualitor());
             Process[] procs = Process.GetProcesses();
@@ -33,13 +33,15 @@ namespace ProcessInfo
             {
                 if (process.Id != 0)
                 {
-                    if (ProcessUtilizations.Contains(new ProcessUtilization(process)))
+                    ProcessUtilization processUtil = new ProcessUtilization(process);
+                    if (ProcessUtilizations.Contains(processUtil))
                     {
                         updateIds.Add(process.Id);
+                        processUtil.Dispose();
                     }
                     else
                     {
-                        ProcessUtilizations.Add(new ProcessUtilization(process));
+                        ProcessUtilizations.Add(processUtil);
                     }
                 }
             }
@@ -52,8 +54,22 @@ namespace ProcessInfo
             }
             ProcessUtilizations.RemoveWhere((ProcessUtilization procUtil) => procUtil.process == null);
         }
-
+        public double UpdateGetTotalUtilization()
+        {
+            UpdateProcesses();
+            return GetLastTotalUtilization();
+        }
+        public double GetLastTotalUtilization()
+        {
+            double total = 0;
+            foreach(ProcessUtilization proc in ProcessUtilizations)
+            {
+                total += proc.LastUtilization;
+            }
+            return total;
+        }
     }
+
     class ProcessComparer : IEqualityComparer<Process>
     {
         public bool Equals(Process x, Process y)
@@ -87,6 +103,11 @@ namespace ProcessInfo
             {
                 this.process = null;
             }
+        }
+
+        public void Dispose()
+        {
+            process.Exited -= Process_Exited;
         }
 
         private void Process_Exited(object sender, EventArgs e)
@@ -140,7 +161,7 @@ namespace ProcessInfo
 
             public int GetHashCode(ProcessUtilization obj)
             {
-                if (obj == null)
+                if (obj == null || obj.process == null)
                 {
                     return 0;
                 }
