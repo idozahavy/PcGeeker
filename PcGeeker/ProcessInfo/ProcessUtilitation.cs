@@ -16,9 +16,9 @@ namespace ProcessInfo
         {
             ProcessUtilizations = new HashSet<ProcessUtilization>(new ProcessUtilization.ProcessUtilizationEqualitor());
             Process[] procs = Process.GetProcesses();
-            foreach (Process process in procs)
+            foreach(Process process in procs)
             {
-                if (process.Id != 0)
+                if(process.Id != 0)
                 {
                     ProcessUtilizations.Add(new ProcessUtilization(process));
                 }
@@ -29,12 +29,12 @@ namespace ProcessInfo
         {
             Process[] procs = Process.GetProcesses();
             HashSet<int> updateIds = new HashSet<int>();
-            foreach (Process process in procs)
+            foreach(Process process in procs)
             {
-                if (process.Id != 0)
+                if(process.Id != 0)
                 {
                     ProcessUtilization processUtil = new ProcessUtilization(process);
-                    if (ProcessUtilizations.Contains(processUtil))
+                    if(ProcessUtilizations.Contains(processUtil))
                     {
                         updateIds.Add(process.Id);
                         processUtil.Dispose();
@@ -45,9 +45,9 @@ namespace ProcessInfo
                     }
                 }
             }
-            foreach (ProcessUtilization procUtil in ProcessUtilizations)
+            foreach(ProcessUtilization procUtil in ProcessUtilizations)
             {
-                if (updateIds.Contains(procUtil.process.Id))
+                if(updateIds.Contains(procUtil.process.Id))
                 {
                     procUtil.GetUtilizationValue();
                 }
@@ -63,10 +63,10 @@ namespace ProcessInfo
         {
             double total = 0;
             foreach(ProcessUtilization proc in ProcessUtilizations)
-            {
+            { 
                 total += proc.LastUtilization;
             }
-            return total;
+            return total > 1 ? 1 : total;
         }
     }
 
