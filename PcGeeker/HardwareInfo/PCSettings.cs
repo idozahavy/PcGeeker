@@ -8,18 +8,20 @@ namespace HardwareInfo
         public bool GPU { get; private set; }
         public bool RAM { get; private set; }
         public bool Drive { get; private set; }
-        public bool MOTHERBOARD { get; private set; }
-        public bool FAN { get; private set; }
+        public bool Motherboard { get; private set; }
+        public bool Fan { get; private set; }
 
-        public PCSettings(bool cPU, bool gPU, bool rAM, bool drive, bool mOTHERBOARD, bool fAN)
+        public PCSettings(bool cpu, bool gpu, bool ram, bool drive, bool motherboard, bool fan)
         {
-            CPU = cPU;
-            GPU = gPU;
-            RAM = rAM;
+            CPU = cpu;
+            GPU = gpu;
+            RAM = ram;
             Drive = drive;
-            MOTHERBOARD = mOTHERBOARD;
-            FAN = fAN;
+            Motherboard = motherboard;
+            Fan = fan;
         }
+
+
 
         /// <summary>
         ///
@@ -37,35 +39,35 @@ namespace HardwareInfo
                 switch(arg.ToLower())
                 {
                     case "cpu":
-                        this.CPU = true;
+                        CPU = true;
                         break;
 
                     case "graphic":
                     case "graphics":
                     case "gpu":
-                        this.GPU = true;
+                        GPU = true;
                         break;
 
                     case "memory":
                     case "ram":
-                        this.RAM = true;
+                        RAM = true;
                         break;
 
                     case "mb":
                     case "mainboard":
                     case "motherboard":
-                        this.MOTHERBOARD = true;
+                        Motherboard = true;
                         break;
 
                     case "ssd":
                     case "hdd":
                     case "drive":
-                        this.Drive = true;
+                        Drive = true;
                         break;
 
                     case "fans":
                     case "fan":
-                        this.FAN = true;
+                        Fan = true;
                         break;
                 }
             }
@@ -76,9 +78,9 @@ namespace HardwareInfo
             computer.CPUEnabled = CPU;
             computer.GPUEnabled = GPU;
             computer.RAMEnabled = RAM;
-            computer.MainboardEnabled = MOTHERBOARD;
+            computer.MainboardEnabled = Motherboard;
             computer.HDDEnabled = Drive;
-            computer.FanControllerEnabled = FAN;
+            computer.FanControllerEnabled = Fan;
         }
     }
 }
