@@ -12,8 +12,8 @@ namespace HardwareInfo
         private PCSettings visitSetting;
 
         public new CPU CPU { get; private set; }
-        public new GPU GPU { get; private set; }
-        public new RAM RAM { get; private set; }
+        public new List<GPU> GPU { get; private set; }
+        public new List<RAM> RAM { get; private set; }
         public new List<Drive> Drive { get; private set; }
         public new Motherboard Motherboard { get; private set; }
 
@@ -38,7 +38,9 @@ namespace HardwareInfo
 
         public void Initialize()
         {
-            this.Drive = new List<Drive>();
+            Drive = new List<Drive>();
+            RAM = new List<RAM>();
+            GPU = new List<GPU>();
             visitor = new CascadingVisitor();
             computer = new Computer();
             visitSetting.SetComputerSettings(computer);
@@ -59,7 +61,7 @@ namespace HardwareInfo
 
                     case HardwareType.GpuAti:
                     case HardwareType.GpuNvidia:
-                        this.GPU = new GPU(hard);
+                        this.GPU.Add(new GPU(hard));
                         break;
 
                     case HardwareType.HDD:
@@ -71,7 +73,7 @@ namespace HardwareInfo
                         break;
 
                     case HardwareType.RAM:
-                        this.RAM = new RAM(hard);
+                        this.RAM.Add(new RAM(hard));
                         break;
 
                     case HardwareType.SuperIO:

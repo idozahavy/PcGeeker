@@ -25,6 +25,7 @@ namespace PcGeeker
     {
         private PC pc;
         private CPUAnalyzer cpuAnalyzer;
+        private PCAnalyzer pcAnalyzer;
         ProcessUtilizationCollection utils;
 
         public Form1()
@@ -33,6 +34,12 @@ namespace PcGeeker
 
             pc = new PC(true);
             pc.Update();
+            pcAnalyzer = new PCAnalyzer(pc, new PCAnalyzerSettings(new CPUAnalyzerSettings(null,
+                new FieldThreshold(CPU.CPUField.CoresPower, 25),
+                new FieldThreshold(CPU.CPUField.PackagePower, 40),
+                new FieldThreshold(CPU.CPUField.PackageTemperature, 60),
+                new FieldThreshold(CPU.CPUField.TotalLoad, 70)
+                ), null, null, null, null));
             cpuAnalyzer = new CPUAnalyzer(pc.CPU, new CPUAnalyzerSettings(null,
                 new FieldThreshold(CPU.CPUField.CoresPower, 25),
                 new FieldThreshold(CPU.CPUField.PackagePower, 40),
@@ -47,23 +54,19 @@ namespace PcGeeker
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            List<FieldThreshold> fields = new List<FieldThreshold>
-            {
-                new FieldThreshold(Core.CPUCoreField.Load, 80)
-            };
+            PCAnalysis pcAnalysis = pcAnalyzer.Analyze();
+
             pc.Update();
             allTabListBox.Items.Clear();
-            CPUAnalysis analysis = cpuAnalyzer.Analyze();
-            analysis.Where<bool>(www);
-            label1.Text = utils.UpdateGetTotalUtilization().ToString();
-        }
-
-        private void www(object self, PropertyInfo prop, bool value)
-        {
-            if(value)
+            CPUAnalysis analysis = pcAnalysis.CPU;
+            analysis.Where<bool>((object self, PropertyInfo prop, bool value) =>
             {
-                allTabListBox.Items.Add(prop.Name + " thresholded");
-            }
+                if(value)
+                {
+                    allTabListBox.Items.Add(prop.Name + " thresholded");
+                }
+            });
+            label1.Text = String.Format("{0:N2}",utils.UpdateGetTotalUtilization());
         }
     }
 }

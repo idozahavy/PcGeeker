@@ -14,7 +14,7 @@ namespace HardwareInfo.HardwareClass
         }
 
         public T CPU { get; internal set; }
-        public T GPU { get; internal set; }
+        public List<T> GPU { get; internal set; }
         public List<T> RAM { get; internal set; }
         public List<T> Drive { get; internal set; }
         public T Motherboard { get; internal set; }
