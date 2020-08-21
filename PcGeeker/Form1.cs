@@ -24,7 +24,6 @@ namespace PcGeeker
     public partial class Form1 : Form
     {
         private PC pc;
-        private CPUAnalyzer cpuAnalyzer;
         private PCAnalyzer pcAnalyzer;
         ProcessUtilizationCollection utils;
 
@@ -40,13 +39,6 @@ namespace PcGeeker
                 new FieldThreshold(CPU.CPUField.PackageTemperature, 60),
                 new FieldThreshold(CPU.CPUField.TotalLoad, 70)
                 ), null, null, null, null));
-            cpuAnalyzer = new CPUAnalyzer(pc.CPU, new CPUAnalyzerSettings(null,
-                new FieldThreshold(CPU.CPUField.CoresPower, 25),
-                new FieldThreshold(CPU.CPUField.PackagePower, 40),
-                new FieldThreshold(CPU.CPUField.PackageTemperature, 60),
-                new FieldThreshold(CPU.CPUField.TotalLoad, 70)
-                )
-            );
             utils = new ProcessUtilizationCollection();
             utils.UpdateProcesses();
             Timer1.Start();

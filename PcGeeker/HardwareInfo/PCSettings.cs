@@ -7,18 +7,18 @@ namespace HardwareInfo
         public bool CPU { get; private set; }
         public bool GPU { get; private set; }
         public bool RAM { get; private set; }
+        public bool Drive { get; private set; }
         public bool MOTHERBOARD { get; private set; }
-        public bool HDD { get; private set; }
         public bool FAN { get; private set; }
 
-        public PCSettings(bool cpu, bool gpu, bool ram, bool motherboard, bool hdd, bool fan)
+        public PCSettings(bool cPU, bool gPU, bool rAM, bool drive, bool mOTHERBOARD, bool fAN)
         {
-            this.CPU = cpu;
-            this.GPU = gpu;
-            this.RAM = ram;
-            this.MOTHERBOARD = motherboard;
-            this.HDD = hdd;
-            this.FAN = fan;
+            CPU = cPU;
+            GPU = gPU;
+            RAM = rAM;
+            Drive = drive;
+            MOTHERBOARD = mOTHERBOARD;
+            FAN = fAN;
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace HardwareInfo
                     case "ssd":
                     case "hdd":
                     case "drive":
-                        this.HDD = true;
+                        this.Drive = true;
                         break;
 
                     case "fans":
@@ -77,7 +77,7 @@ namespace HardwareInfo
             computer.GPUEnabled = GPU;
             computer.RAMEnabled = RAM;
             computer.MainboardEnabled = MOTHERBOARD;
-            computer.HDDEnabled = HDD;
+            computer.HDDEnabled = Drive;
             computer.FanControllerEnabled = FAN;
         }
     }
